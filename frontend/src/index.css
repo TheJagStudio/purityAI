@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 body {
   margin: 0;
@@ -23,9 +23,6 @@ code {
   --primary-color-blue: #1C2939;
   --primary-color-orange: #FF5D00;
   --primary-color-gray: #E1E1E1;
-
-  --font-Alkatra: 'Alkatra', cursive;
-
 }
 
 .font-Alkatra {
@@ -43,6 +40,7 @@ code {
   border: none;
   border-radius: 50%;
 }
+
 /* Seekbar progress */
 #seekBar::-moz-range-progress {
   height: var(--trackSize);
@@ -51,22 +49,31 @@ code {
 }
 
 #seekBar2::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
+  -webkit-appearance: none;
+  /* Override default look */
   appearance: none;
   position: relative;
-  width: 8px; /* Set a specific slider handle width */
-  height: 110px; /* Slider handle height */
-  background: var(--thumbBg); /* Green background */
-  cursor: grab; /* Cursor on hover */
+  width: 8px;
+  /* Set a specific slider handle width */
+  height: 110px;
+  /* Slider handle height */
+  background: var(--thumbBg);
+  /* Green background */
+  cursor: grab;
+  /* Cursor on hover */
   border: none;
   border-radius: 20px;
 }
 
 #seekBar2::-moz-range-thumb {
-  width: 8px; /* Set a specific slider handle width */
-  height: 110px;  /* Slider handle height */
-  background: var(--thumbBg); /* Green background */
-  cursor: grab; /* Cursor on hover */
+  width: 8px;
+  /* Set a specific slider handle width */
+  height: 110px;
+  /* Slider handle height */
+  background: var(--thumbBg);
+  /* Green background */
+  cursor: grab;
+  /* Cursor on hover */
   border: none;
   border-radius: 20px;
 }
@@ -82,6 +89,7 @@ code {
   border: none;
   border-radius: 50%;
 }
+
 /* Mutebar progress */
 #volume::-moz-range-progress {
   height: var(--trackSize);
