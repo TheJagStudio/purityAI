@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+:root {
+  --thumbSize: 12px;
+  --trackSize: 2px;
+  --thumbBg: rgb(245 158 11);
+  --trackBg: rgb(147 197 253);
+  --progressBg: rgb(253, 202, 114);
+
+  --primary-color-blue: #1C2939;
+  --primary-color-orange: #FF5D00;
+  --primary-color-gray: #E1E1E1;
+
+  --font-Alkatra: 'Alkatra', cursive;
+
+}
+
+.font-Alkatra {
+  font-family: 'Alkatra', cursive;
+}
+
+/* SeekBar Styling */
+/* SeekBar Thumb */
+#seekBar::-webkit-slider-thumb,
+#seekBar::-moz-range-thumb {
+  -webkit-appearance: none;
+  background: rgb(245 158 11);
+  height: 12px;
+  width: 12px;
+  border: none;
+  border-radius: 50%;
+}
+/* Seekbar progress */
+#seekBar::-moz-range-progress {
+  height: var(--trackSize);
+  background-color: var(--progressBg);
+  border-radius: calc(var(--trackSize) / 2) 0 0 calc(var(--trackSize) / 2);
+}
+
+#seekBar2::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  position: relative;
+  width: 8px; /* Set a specific slider handle width */
+  height: 110px; /* Slider handle height */
+  background: var(--thumbBg); /* Green background */
+  cursor: grab; /* Cursor on hover */
+  border: none;
+  border-radius: 20px;
+}
+
+#seekBar2::-moz-range-thumb {
+  width: 8px; /* Set a specific slider handle width */
+  height: 110px;  /* Slider handle height */
+  background: var(--thumbBg); /* Green background */
+  cursor: grab; /* Cursor on hover */
+  border: none;
+  border-radius: 20px;
+}
+
+/* MuteBar Styling */
+/* Mutebar Thumb */
+#volume::-webkit-slider-thumb,
+#volume::-moz-range-thumb {
+  -webkit-appearance: none;
+  background: var(--thumbBg);
+  height: 10px;
+  width: 10px;
+  border: none;
+  border-radius: 50%;
+}
+/* Mutebar progress */
+#volume::-moz-range-progress {
+  height: var(--trackSize);
+  background-color: var(--progressBg);
+  border-radius: calc(var(--trackSize) / 2) 0 0 calc(var(--trackSize) / 2);
+}
+
+
+.customScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.frame-even {
+  display: none;
+}
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .yt-overlay {
+    background: radial-gradient(transparent, black 70%);
+  }
+}
