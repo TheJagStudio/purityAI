@@ -111,7 +111,6 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer utilities {
   .yt-overlay {
     background: radial-gradient(transparent, black 70%);
