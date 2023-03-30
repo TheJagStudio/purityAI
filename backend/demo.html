@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Image Classification</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.14.0/dist/tf.min.js"></script>
+
+</head>
+<body>
+  <input type="file" id="image-input">
+  <canvas id="image-canvas"></canvas>
+  <script>
+    // Load the converted TensorFlow model
+    const MODEL_URL = 'your_model_url';
+    tf.loadLayersModel(MODEL_URL).then(model => {
+      // Get a reference to the image input element
+      const inputElement = document.getElementById('image-input');
+
+      // Set up a callback to run when the user selects an image
+      inputElement.addEventListener('change', () => {
+        // Get a reference to the selected file
+        const file = inputElement.files[0];
+
+        // Create a new image element to display the selected image
+        const img = new Image();
+
+        // Set up a callback to run when the image finishes loading
+        img.onload = async () => {
+          // Create a canvas element to resize the image
+          const canvas = document.getElementById('image-canvas');
+          canvas.width = 224;
+          canvas.height = 224;
+
+          // Draw the image on the canvas with resizing
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, 224, 224);
+
+          // Convert the canvas to a TensorFlow tensor
+          const input = tf.browser.fromPixels(canvas).toFloat();
+
+          // Preprocess the input tensor to match the format expected by the model
+          const preprocessedInput = input.div(tf.scalar(255.0)).expandDims();
+
+          // Make a prediction with the model
+          const output = await model.predict(preprocessedInput).data();
+
+          // Display the output array
+          console.log(output);
+        };
+
+        // Set the src attribute of the image element to the URL of the selected file
+        img.src = URL.createObjectURL(file);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -2,22 +2,22 @@ import React from "react";
 
 const Footer = () => {
 	return (
-		<footer className="flex w-full bg-dark-primary mx-auto flex-col items-center pt-10">
-			<div className="mx-4 grid grid-cols-2 gap-16 text-xs md:grid-cols-4">
-				<section className="flex flex-col gap-3">
-					<h6 className="mb-3 font-bold text-secondary text-xl">PurityAi</h6>
-					<a className="my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary" href="/">
+		<footer className="flex w-full bg-dark-primary md:px-10 px-6 flex-col sm:items-center pt-10">
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:gap-16 gap-10 place-items-start text-xs md:w-auto w-full">
+				<section className="flex flex-col items-start gap-3">
+					<div className="flex items-center sm:gap-3 gap-2">
+						<img src="/static/images/logo.png" alt="Logo" className="w-[40px] h-auto -translate-y-1"></img>
+						<h6 className="mb-3 font-bold text-secondary text-xl">PurityAi</h6>
+					</div>
+					<a className="my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary hover:translate-x-2 transition-all duration-200" href="/">
 						Home
 					</a>
-					<a className="my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary" href="/">
+					{/* <a className="my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary hover:translate-x-2 transition-all duration-200" href="/">
 						Affiliate Program
-					</a>
-					<a className="my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary" href="/">
-						Stability.ai
-					</a>
+					</a> */}
 				</section>
-				<section className="flex flex-col gap-3">
-					<h6 className="mb-3 font-bold text-secondary text-xl hover:translate-x-2 transition-all duration-200">Support</h6>
+				<section className="flex flex-col sm:gap-3 gap-2">
+					<h6 className="mb-3 font-bold text-secondary text-xl">Support</h6>
 					<a
 						className="my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary hover:translate-x-2 transition-all duration-200"
 						onClick={() => {
@@ -31,7 +31,7 @@ const Footer = () => {
 						Help
 					</a>
 				</section>
-				<section className="flex flex-col gap-3">
+				<section className="flex flex-col sm:gap-3 gap-2">
 					<h6 className="mb-3 font-bold text-secondary text-xl">Legal</h6>
 					<a className="my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary hover:translate-x-2 transition-all duration-200" href="/">
 						Privacy
@@ -45,13 +45,12 @@ const Footer = () => {
 					<a className="my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary hover:translate-x-2 transition-all duration-200" href="/">
 						Cookie Use
 					</a>
-					<a className="termly-cookie-preference-button my-1 cursor-pointer text-[16px] text-white/75 hover:text-secondary hover:translate-x-2 transition-all duration-200">Cookies preferences</a>
 				</section>
-				<section className="flex flex-col gap-3">
+				<section className="flex flex-col sm:gap-3 gap-2">
 					<h6 className="mb-3 font-bold text-secondary text-xl">Social</h6>
 					<a className="my-1 flex cursor-pointer items-center gap-4 text-[16px] text-white/75 hover:text-secondary hover:translate-x-2 transition-all duration-200" href="/">
 						<svg width="16" height="16" viewBox="0 0 2447.6 2452.5" xmlns="http://www.w3.org/2000/svg">
-							<g clip-rule="evenodd" fill-rule="evenodd">
+							<g clipRule="evenodd" fillRule="evenodd">
 								<path d="m897.4 0c-135.3.1-244.8 109.9-244.7 245.2-.1 135.3 109.5 245.1 244.8 245.2h244.8v-245.1c.1-135.3-109.5-245.1-244.9-245.3.1 0 .1 0 0 0m0 654h-652.6c-135.3.1-244.9 109.9-244.8 245.2-.2 135.3 109.4 245.1 244.7 245.3h652.7c135.3-.1 244.9-109.9 244.8-245.2.1-135.4-109.5-245.2-244.8-245.3z" fill="currentcolor"></path>
 								<path d="m2447.6 899.2c.1-135.3-109.5-245.1-244.8-245.2-135.3.1-244.9 109.9-244.8 245.2v245.3h244.8c135.3-.1 244.9-109.9 244.8-245.3zm-652.7 0v-654c.1-135.2-109.4-245-244.7-245.2-135.3.1-244.9 109.9-244.8 245.2v654c-.2 135.3 109.4 245.1 244.7 245.3 135.3-.1 244.9-109.9 244.8-245.3z" fill="currentcolor"></path>
 								<path d="m1550.1 2452.5c135.3-.1 244.9-109.9 244.8-245.2.1-135.3-109.5-245.1-244.8-245.2h-244.8v245.2c-.1 135.2 109.5 245 244.8 245.2zm0-654.1h652.7c135.3-.1 244.9-109.9 244.8-245.2.2-135.3-109.4-245.1-244.7-245.3h-652.7c-135.3.1-244.9 109.9-244.8 245.2-.1 135.4 109.4 245.2 244.7 245.3z" fill="currentcolor"></path>
@@ -68,7 +67,7 @@ const Footer = () => {
 					</a>
 					<a className="my-1 flex cursor-pointer items-center gap-4 text-[16px] text-white/75 hover:text-secondary hover:translate-x-2 transition-all duration-200" href="/">
 						<svg xmlns="http://www.w3.org/2000/svg" className="overflow-visible" viewBox="0 0 26.245 26.256" width="16" height="16">
-							<path d="M26.254 13.128c0 7.253-5.875 13.128-13.128 13.128S-.003 20.382-.003 13.128 5.872 0 13.125 0s13.128 5.875 13.128 13.128" fill="transparent" stroke="currentcolor" stroke-width="1"></path>
+							<path d="M26.254 13.128c0 7.253-5.875 13.128-13.128 13.128S-.003 20.382-.003 13.128 5.872 0 13.125 0s13.128 5.875 13.128 13.128" fill="transparent" stroke="currentcolor" strokeWidth="1"></path>
 							<path d="M14.876 13.128h-3.72V9.2h3.72c1.083 0 1.97.886 1.97 1.97s-.886 1.97-1.97 1.97m0-6.564H8.53v13.128h2.626v-3.938h3.72c2.538 0 4.595-2.057 4.595-4.595s-2.057-4.595-4.595-4.595" fill="currentcolor"></path>
 						</svg>
 						Product Hunt
@@ -90,7 +89,12 @@ const Footer = () => {
 					</a>
 				</section>
 			</div>
-			<div className="my-7 text-xl text-white/75 ">Copyright © 2023 PurityAI</div>
+			<div className="my-8 pt-6 flex sm:flex-row flex-col sm:gap-0 gap-3 items-center justify-between text-xl font-semibold w-full text-white/75 relative before:absolute before:top-0 before:left-0 before:content-[''] before:w-full before:h-[1px] before:bg-white/75">
+				<p>Copyright © 2023 PurityAI</p>
+				<p className="sm:text-xl text-base">
+					Developed By <span className="text-secondary italic">DREAMERS</span>
+				</p>
+			</div>
 		</footer>
 	);
 };

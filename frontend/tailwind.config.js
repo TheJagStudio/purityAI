@@ -20,13 +20,13 @@ module.exports = {
 			},
 			backgroundColor: {
 				primary: "#171717",
-				secondary: "#FF5D00",
+				secondary: "#fa833e",
 				"dark-primary": "#262626",
 				"half-transparent": "rgba(0, 0, 0, 0.5)",
 			},
 			colors: {
 				primary: "#171717",
-				secondary: "#FF5D00",
+				secondary: "#fa833e",
 				"dark-primary": "#262626",
 			},
 			borderWidth: {

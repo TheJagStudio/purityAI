@@ -15,7 +15,7 @@ const ContactUs = () => {
 						document.getElementById("contactUsOverlay").classList.remove("right-3");
 					}}
 				>
-					<path stroke="#ffffff" stroke-linecap="round" stroke-width="2" d="M3 8h10"></path>
+					<path stroke="#ffffff" strokeLinecap="round" strokeWidth="2" d="M3 8h10"></path>
 				</svg>
 			</div>
 			<div className="max-h-[400px] overflow-y-scroll customScrollbar">
