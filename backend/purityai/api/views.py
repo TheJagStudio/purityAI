@@ -5,6 +5,10 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 import base64
 from datetime import datetime
+import http.client
+import time
+from PIL import Image,ImageFilter
+import io
 
 access_token = ""
 refresh_token = ""
@@ -12,6 +16,13 @@ id_token = ""
 gtoken = "03AKH6MRHx9bdEtfRCXXooXD05YOTxMi4kFvF-SfoCw0a9qOZ2yu9BsvKDk2A8RXlcnMHNGfRd3TPtf-PAeiSWhrcvoB-wA3KtbigVKuQjjyQPUPtbyHnF6RpbOqLU0jLLMuQOnqsQs7lbk7FE4z4LlIzbbAgf5qOyCTWuqTz47xzOH5nnYpe5QkIBHafAh-m3c7NdPD-M23hQ0E9wiC6vO9vTWarXcEvTctGEa7V4JTyHpk5YAh-yz4vg2BoWaMGPmf1Cz1zKKnoBoB3vjFFK0yBN3_VUODigEx73ZdwXtdIg-E4NeGvtPu1cnnYBkSlQHQhzNVAuGhZ0Wjg3n6lK3GmpYukLPBA8I1wbktR1NA9mUCH3wrsZZmnlaIPEfYAqaICsIHOAbSTyoqJTHnkKHnJByY3tjtCEcsXQWumlgNY0m20yCfidmXGLxZPOdhKCyhr3Y-mMiS9hqhe5xfGVIZN-deNHeAJ_vy2EpU_xwwVJ87r2tCzEOqRtZ5l6g5ttDw4cbi6lsnQ_Lx6_gO6BoNcKD_MVTODF9Q"
 imageGenrated = 0
 startTime = datetime.now()
+csrfToken = ""
+purifyAPI = ""
+url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDCvp5MTJLUdtBYEKYWXJrlLzu1zuKM6Xw"
+payload = "{returnSecureToken: true}"
+headers = {'Content-Type': 'application/javascript'}
+response = requests.request("POST", url, headers=headers, data=payload)
+token = "bearer " + str(response.json()['idToken'])
 
 def tokenGenrator(request):
     global access_token, refresh_token, id_token
@@ -61,6 +72,7 @@ def backgroundRemover(request):
             startTime = datetime.now()
         if access_token == "":
             access_token = tokenGenrator(request)
+        print(access_token)
         url = "https://api.clipdrop.co/remove-background/v2"
         payload={'outputs[]': 'composite','composite_format': 'webp'}
         files=[
@@ -82,6 +94,66 @@ def backgroundRemover(request):
             'x-clipdrop-pro-client': 'false'
         }
         response = requests.request("POST", url, headers=headers, data=payload, files=files)
+        try:
+            if("error" in response.json().keys()):
+                imageGenrated = 100
+                return HttpResponse(json.dumps(response.json()),content_type="application/json")
+        except:
+            pass
+        return HttpResponse(response.content, content_type="image/png")
+        
+    return HttpResponse(json.dumps({"error":"You were not supposed to be here."}), content_type="application/json")
+
+
+@csrf_exempt
+def cleanUp(request):
+    global access_token, imageGenrated,startTime
+    if request.method == 'POST':
+        image = request.FILES['image']
+        mask = request.FILES['mask']
+        temp1 = Image.open(image)
+        temp2 = Image.open(mask)
+        temp1.save("temp1.png")
+        temp2.save("temp2.png")
+        endTime = datetime.now()
+        imageGenrated = imageGenrated + 1
+        print((endTime - startTime).total_seconds())
+        if (endTime - startTime).total_seconds() > 360 or imageGenrated > 10:
+            access_token = ""
+            imageGenrated = 0
+            startTime = datetime.now()
+        if access_token == "":
+            access_token = tokenGenrator(request)
+        url = "https://api.clipdrop.co/cleanup/v1"
+        files=[
+            ('image_file',(image.name,image)),
+            ('mask_file',(mask.name,mask))
+        ]
+        headers = {
+            'authority': 'api.clipdrop.co',
+            'accept': '*/*',
+            'accept-language': 'en-US,en;q=0.9',
+            'authorization': 'Bearer '+access_token,
+            'origin': 'https://clipdrop.co',
+            'referer': 'https://clipdrop.co/',
+            'sec-ch-ua': '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
+            'x-clipdrop-pro-client': 'false'
+        }
+
+        response = requests.request("POST", url, headers=headers, files=files)
+        try:
+            print(response.json())  
+            if("error" in response.json().keys()):
+                imageGenrated = 100
+                return HttpResponse(json.dumps(response.json()),content_type="application/json")
+        except:
+            pass
         return HttpResponse(response.content, content_type="image/png")
         
     return HttpResponse(json.dumps({"error":"You were not supposed to be here."}), content_type="application/json")
@@ -122,6 +194,12 @@ def imageUpscaler(request):
             'x-clipdrop-pro-client': 'false'
         }
         response = requests.request("POST", url, headers=headers, data=payload, files=files)
+        try:
+            if("error" in response.json().keys()):
+                imageGenrated = 100
+                return HttpResponse(json.dumps(response.json()),content_type="application/json")
+        except:
+            pass
         return HttpResponse(response.content, content_type="image/png")
     return HttpResponse(json.dumps({"error":"You were not supposed to be here."}), content_type="application/json")
 
@@ -159,6 +237,12 @@ def textRemoval(request):
             'x-clipdrop-pro-client': 'false'
         }
         response = requests.request("POST", url, headers=headers, files=files)
+        try:
+            if("error" in response.json().keys()):
+                imageGenrated = 100
+                return HttpResponse(json.dumps(response.json()),content_type="application/json")
+        except:
+            pass
         return HttpResponse(response.content, content_type="image/png")
     return HttpResponse(json.dumps({"error":"You were not supposed to be here."}), content_type="application/json")
 
@@ -171,12 +255,49 @@ def gtokenSet(request):
     return HttpResponse(json.dumps({"msg":"Token Not Set"}), content_type="application/json")
 
 @csrf_exempt
+def purifySet(request):
+    global purifyAPI
+    if request.method == 'GET':
+        purifyAPI = request.GET.get('purifyAPI')
+        return HttpResponse(json.dumps({"msg":"Token Set"}), content_type="application/json")
+    return HttpResponse(json.dumps({"msg":"Token Not Set"}), content_type="application/json")
+
+# def imgUrlGen(image):
+#     url = "https://imgbb.com/json"
+
+#     payload={'type': 'file','action': 'upload','timestamp': '1680193988230','expiration': 'PT5M'}
+#     print("before")
+#     files=[
+#         ('source',(image.name,image.read(),'image/jpeg'))
+#     ]
+    
+#     headers = {
+#         'authority': 'imgbb.com',
+#         'accept': 'application/json',
+#         'accept-language': 'en-US,en;q=0.9,gu;q=0.8',
+#         'origin': 'https://imgbb.com',
+#         'referer': 'https://imgbb.com/',
+#         'sec-ch-ua': '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+#         'sec-ch-ua-mobile': '?0',
+#         'sec-ch-ua-platform': '"Windows"',
+#         'sec-fetch-dest': 'empty',
+#         'sec-fetch-mode': 'cors',
+#         'sec-fetch-site': 'same-origin',
+#         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'
+#     }
+
+#     response = requests.request("POST", url, headers=headers, data=payload)
+#     print(response.text)
+#     print("after")
+#     return response.json()["image"]["url"]
+
+@csrf_exempt
 def visionAI(request):
-    global gtoken
+    global gtoken,purifyAPI
     if request.method == 'POST':
         image = request.FILES['image']
         encoded_string = base64.b64encode(image.read()).decode('utf-8')
-        url = "https://cxl-services.appspot.com/proxy?url=https%3A%2F%2Fvision.googleapis.com%2Fv1%2Fimages%3Aannotate&token="+gtoken
+        url = "https://cxl-services.appspot.com/proxy?url=https%3A%2F%2Fvision.googleapis.com%2Fv1%2Fimages%3Aannotate&token=" +gtoken
         payload = {"requests":[{"image":{"content":encoded_string},"features": [{"type": "LANDMARK_DETECTION","maxResults": 50},{"type": "FACE_DETECTION","maxResults": 50},{"type": "OBJECT_LOCALIZATION","maxResults": 50},{"type": "LOGO_DETECTION","maxResults": 50},{"type": "LABEL_DETECTION","maxResults": 50},{"type": "DOCUMENT_TEXT_DETECTION","maxResults": 50,"model": "builtin/latest"},{"type": "SAFE_SEARCH_DETECTION","maxResults": 100}]}]}
         headers = {
             'authority': 'cxl-services.appspot.com',
@@ -185,32 +306,192 @@ def visionAI(request):
             'content-type': 'text/plain;charset=UTF-8',
             'origin': 'https://www.gstatic.com'
         }
-        response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
-        print(response.json()["responses"][0].keys())
-        data = {}
         try:
-            data["Label"] = response.json()["responses"][0]["labelAnnotations"]
+            response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+            print(response.json()["responses"][0].keys())
+            data = {}
+            try:
+                data["Label"] = response.json()["responses"][0]["labelAnnotations"]
+            except:
+                pass
+            try:
+                data["Logo"] = response.json()["responses"][0]["logoAnnotations"]
+            except:
+                pass
+            try:
+                data["Text"] = response.json()["responses"][0]["fullTextAnnotation"]["text"]
+            except:
+                pass
+            try:
+                data["Safe Search"] = response.json()["responses"][0]["safeSearchAnnotation"]
+            except:
+                pass
+            try:
+                data["Object"] = response.json()["responses"][0]["localizedObjectAnnotations"]
+            except:
+                pass
+            try:
+                data["Face"] = response.json()["responses"][0]["faceAnnotations"]
+            except:
+                pass
+            # try:
+            #     imgUrl = imgUrlGen(image)
+            #     url = "https://im-api1.webpurify.com/services/rest/?api_key="+purifyAPI+"&cats=nudity,wad,offensive,gore,text,faces,celebrities,ocr,scam&method=webpurify.hybrid.imgcheck&threshold_nudity_lt=50&imgurl="+imgUrl
+            #     response = requests.request("GET", url)
+            #     purifyData = xmltodict.parse(response.text)
+            #     data["Summary"] = purifyData["rsp"]
+            # except:
+            #     print("Purify API Error")
+            #     pass
+            return HttpResponse(json.dumps({"data":data}), content_type="application/json")
+        except:
+            print("Gtoken API Error")
+            return HttpResponse(json.dumps({"error":"Gtoken API Error"}), content_type="application/json")
+    return HttpResponse(json.dumps({"error":"You were not supposed to be here."}), content_type="application/json")
+
+
+def genrator(prompt,style):
+    global token
+    url = "https://paint.api.wombo.ai/api/tasks"
+
+    payload = "{\"premium\":false}"
+    headers = {
+        'sec-ch-ua':
+        '"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"',
+        'Authorization': token,
+        'x-app-version': 'WEB-1.90.1',
+        'sec-ch-ua-mobile': '?0',
+        'Content-Type': 'text/plain;charset=UTF-8',
+        'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
+        'sec-ch-ua-platform': '"Windows"',
+        'Accept': '*/*',
+        'host': 'paint.api.wombo.ai'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+    id = str(response.json()['id'])
+    url = "https://paint.api.wombo.ai/api/tasks/" + id
+
+    payload = "{\"input_spec\":{\"prompt\":\"" + prompt + "\",\"style\":"+str(style)+",\"display_freq\":10}}"
+    headers = {
+        'sec-ch-ua':
+        '"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"',
+        'Authorization': token,
+        'x-app-version': 'WEB-1.90.1',
+        'sec-ch-ua-mobile': '?0',
+        'Content-Type': 'text/plain;charset=UTF-8',
+        'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
+        'sec-ch-ua-platform': '"Windows"',
+        'Accept': '*/*',
+        'host': 'paint.api.wombo.ai'
+    }
+
+    response = requests.request("PUT", url, headers=headers, data=payload)
+    url = "https://paint.api.wombo.ai/api/tasks/" + id
+
+    payload = {}
+    headers = {
+        'sec-ch-ua':
+        '"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"',
+        'Authorization': token,
+        'x-app-version': 'WEB-1.90.1',
+        'sec-ch-ua-mobile': '?0',
+        'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
+        'sec-ch-ua-platform': '"Windows"',
+        'Accept': '*/*',
+        'host': 'paint.api.wombo.ai'
+    }
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    count = 1
+    while response.json()["result"] == None and count < 30:
+        time.sleep(1)
+        response = requests.request("GET", url, headers=headers, data=payload)
+        count = count + 1
+    try:
+        returnData = "https://images.wombo.art/generated/" + response.json(
+        )['photo_url_list'][-1].split("generated/")[1]
+        return returnData
+    except:
+        return "Error try again"
+
+
+@csrf_exempt
+def imageGen(request):
+    global token
+    if request.method == 'POST':
+        prompt = request.POST.get('prompt')
+        style = request.POST.get('style')
+        try:
+            link = genrator(prompt,style)
+            return HttpResponse(json.dumps({"data":genrator("yellow colored cat")}), content_type="application/json")
+        except:
+            url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDCvp5MTJLUdtBYEKYWXJrlLzu1zuKM6Xw"
+            payload = "{returnSecureToken: true}"
+            headers = {'Content-Type': 'application/javascript'}
+            response = requests.request("POST", url, headers=headers, data=payload)
+            token = "bearer " + str(response.json()['idToken'])
+            link = genrator(prompt,style)
+            return HttpResponse(json.dumps({"data":link}), content_type="application/json")
+    return HttpResponse(json.dumps({"error":"You were not supposed to be here."}), content_type="application/json")
+
+
+@csrf_exempt
+def reimagine(request):
+    global access_token, imageGenrated,startTime
+    if request.method == 'POST':
+        image = request.FILES['image']
+        # resize image to max 768x768
+        image = Image.open(image)
+        if image.size[0] > 768 or image.size[1] > 768:
+            if image.size[0] > image.size[1]:
+                image = image.resize((768, int(image.size[1]*768/image.size[0])))
+            else:
+                image = image.resize((int(image.size[0]*768/image.size[1]), 768))
+        image = image.convert('RGB')
+        # convert image to bytes
+        imageByteArr = io.BytesIO()
+        image.save(imageByteArr, format='PNG')
+        image = imageByteArr.getvalue()
+
+        endTime = datetime.now()
+        imageGenrated = imageGenrated + 1
+        print((endTime - startTime).total_seconds())
+        if (endTime - startTime).total_seconds() > 360 or imageGenrated > 10:
+            access_token = ""
+            imageGenrated = 0
+            startTime = datetime.now()
+        if access_token == "":
+            access_token = tokenGenrator(request)
+        url = "https://api.clipdrop.co/diffusion/v1/image-variations"
+        files=[
+            ('image_file',('image.png',image,'image/png'))
+        ]
+        headers = {
+            'authority': 'api.clipdrop.co',
+            'accept': 'application/zip',
+            'accept-language': 'en-US,en;q=0.9',
+            'authorization': 'Bearer '+access_token,
+            'origin': 'https://clipdrop.co',
+            'sec-ch-ua': '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
+            'x-clipdrop-pro-client': 'false'
+        }
+        payload={"amount_to_generate":4}
+        response = requests.request("POST", url, headers=headers, data=payload, files=files)
+        try:
+            if("error" in response.json().keys()):
+                imageGenrated = 100
+                return HttpResponse(json.dumps(response.json()),content_type="application/json")
         except:
             pass
-        try:
-            data["Logo"] = response.json()["responses"][0]["logoAnnotations"]
-        except:
-            pass
-        try:
-            data["Text"] = response.json()["responses"][0]["fullTextAnnotation"]["text"]
-        except:
-            pass
-        try:
-            data["Safe Search"] = response.json()["responses"][0]["safeSearchAnnotation"]
-        except:
-            pass
-        try:
-            data["Object"] = response.json()["responses"][0]["localizedObjectAnnotations"]
-        except:
-            pass
-        try:
-            data["Face"] = response.json()["responses"][0]["faceAnnotations"]
-        except:
-            pass
-        return HttpResponse(json.dumps({"data":data}), content_type="application/json")
+        return HttpResponse(response.content, content_type="application/zip")
+        
     return HttpResponse(json.dumps({"error":"You were not supposed to be here."}), content_type="application/json")

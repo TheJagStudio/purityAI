@@ -7,12 +7,12 @@ const Integration = ({ APItitle, height1, height2, height3, height4, height5, if
 	const [activeTab, setActiveTab] = useState("tab1");
 
 	return (
-		<section id="api-section" class="w-full py-12 bg-dark-primary px-12">
-			<div class="max-w-5xl px-2 w-full mx-auto">
-				<div class="w-full">
-					<h2 class="text-3xl md:text-3xl md:leading-[3.5rem] xl:text-[50px] font-extrabold text-white mt-10 mb-10 text-center">Integrate it anywhere with PurityAI {APItitle} API</h2>
-					<div class="w-full flex items-center justify-center gap-10">
-						<div class="flex flex-col justify-center items-center">
+		<section id="api-section" className="w-full py-12 bg-dark-primary px-12">
+			<div className="max-w-5xl px-2 w-full mx-auto">
+				<div className="w-full">
+					<h2 className="text-3xl md:text-3xl md:leading-[3.5rem] xl:text-[50px] font-extrabold text-white mt-10 mb-10 text-center">Integrate it anywhere with PurityAI {APItitle} API</h2>
+					<div className="w-full flex items-center justify-center gap-10">
+						<div className="flex flex-col justify-center items-center">
 							<div className="">
 								<ul className="flex items-center justify-center">
 									<TabNavItem isAPI={true} title={"CURL"} id={"tab1"} svg="https://static.clipdrop.co/web/apis/programming-languages/terminal.svg" activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -40,7 +40,7 @@ const Integration = ({ APItitle, height1, height2, height3, height4, height5, if
 								</div>
 							</div>
 							<a href="/api">
-								<button class="py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-lg hover:opacity-70 active:opacity-50 transition-opacity bg-secondary text-white">Get an API key</button>
+								<button className="py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-lg hover:opacity-70 active:opacity-50 transition-opacity bg-secondary text-white">Get an API key</button>
 							</a>
 						</div>
 					</div>

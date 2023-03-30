@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
+import parse from "html-react-parser";
 import CanvasDraw from "react-canvas-draw";
+
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,10 +13,13 @@ import Details from "../Components/Details/Details";
 import Tools from "../Components/Tools/Tools";
 
 const CleanUp = () => {
+	document.title = "PurityAI | Clean Up";
+
 	const [clipWidth, setClipWidth] = useState(100);
 	const [useCaseInputValue, setUseCaseInputValue] = useState([50, 50, 50, 50]);
 	const [useCaseHilight, setUseCaseHighlight] = useState(0);
 	const [removedBGData, setRemovedBGData] = useState([]);
+	const [brushSizeRange, setBrushSizeRange] = useState(15);
 	const canvasRef = useRef();
 	let swiperRef = useRef();
 
@@ -81,10 +86,47 @@ const CleanUp = () => {
 			const reader = new FileReader();
 			reader.readAsDataURL(file);
 			reader.onload = () => {
-				let image = document.getElementById("inputImage");
-				image.src = reader.result;
-				rmvBgDiv.scrollIntoView({ behavior: "smooth", block: "center" });
-				removeBackground();
+				if (document.getElementsByClassName("canvasDrawContainer")[0]) {
+					let ctx = document.getElementsByClassName("canvasDrawContainer")[0].childNodes[0].getContext("2d");
+
+					ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+					var imageObj1 = new Image();
+					imageObj1.src = reader.result;
+					imageObj1.onload = function () {
+						if (imageObj1.width > imageObj1.height) {
+							ctx.canvas.width = 400;
+							ctx.canvas.height = (imageObj1.height * 400) / imageObj1.width;
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[1].height = ctx.canvas.height;
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[1].width = "400";
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[2].height = ctx.canvas.height;
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[2].width = "400";
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[3].height = ctx.canvas.height;
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[3].width = "400";
+							document.getElementById("outputImage").height = imageObj1.height;
+							document.getElementById("outputImage").width = imageObj1.width;
+							console.log(imageObj1.height, imageObj1.width);
+							ctx.drawImage(imageObj1, 0, 0, 400, ctx.canvas.height);
+						} else {
+							ctx.canvas.height = 400;
+							ctx.canvas.width = (imageObj1.width * 400) / imageObj1.height;
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[1].height = "400";
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[1].width = ctx.canvas.width;
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[2].height = "400";
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[2].width = ctx.canvas.width;
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[3].height = "400";
+							document.getElementsByClassName("canvasDrawContainer")[0].childNodes[3].width = ctx.canvas.width;
+							document.getElementById("outputImage").height = imageObj1.height;
+							document.getElementById("outputImage").width = imageObj1.width;
+							console.log(imageObj1.height, imageObj1.width);
+							ctx.drawImage(imageObj1, 0, 0, ctx.canvas.width, 400);
+						}
+					};
+					rmvBgDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+					// removeBackground();
+				} else {
+					rmvBgDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+					// removeBackground();
+				}
 			};
 			toggleRmvBgDiv();
 		} catch (err) {
@@ -137,6 +179,7 @@ const CleanUp = () => {
 									// document.getElementById("inputImage").src = "/static/images/RB1.jpg";
 									// document.getElementById("outputImage").src = "/static/images/RB1Trans.png";
 									document.getElementById("removedBackgroundImage").scrollIntoView({ behavior: "smooth", block: "center" });
+									canvasRef.current.imgSrc = "/static/images/RB1.jpg";
 								}}
 								alt="use case 1"
 								loading="lazy"
@@ -154,6 +197,7 @@ const CleanUp = () => {
 									document.getElementById("inputImage").src = "/static/images/RB2.jpg";
 									document.getElementById("outputImage").src = "/static/images/RB2Trans.png";
 									document.getElementById("removedBackgroundImage").scrollIntoView({ behavior: "smooth", block: "center" });
+									canvasRef.current.imgSrc = "/static/images/RB2.jpg";
 								}}
 								alt="use case 2"
 								loading="lazy"
@@ -217,25 +261,148 @@ const CleanUp = () => {
 								<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path>
 							</svg>
 						</div>
-						<div className="w-max relative">
-							<CanvasDraw ref={canvasRef} className="rounded-xl" id="canvasDraw" canvasWidth={900} hideGrid={true} brushColor={"#fa833e99"} catenaryColor={"#fa833e"} brushRadius={10} />
-							<div
-								className="w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer scale-100 active:scale-125 transition-all duration-300 absolute top-3 right-4"
-								onClick={() => {
-									canvasRef.current.undo();
-								}}
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffffff" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
-									<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
-									<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
-								</svg>
+						<div
+							className="w-max relative"
+							onLoadCapture={() => {
+								document.getElementsByClassName("canvasDrawContainer")[0].style.background = "transparent";
+								let tempInterval = setInterval(() => {
+									if (document.getElementsByClassName("canvasDrawContainer")[0].childNodes[1])
+										if (document.getElementsByClassName("canvasDrawContainer")[0].childNodes[1].style.opacity !== "0.5") {
+											document.getElementsByClassName("canvasDrawContainer")[0].childNodes[1].style.opacity = "0.5";
+										} else {
+											clearInterval(tempInterval);
+										}
+								}, 1000);
+							}}
+						>
+							<CanvasDraw imgSrc="" ref={canvasRef} className="canvasDrawContainer rounded-xl bg-transparent" id="canvasDraw" canvasWidth={1000} hideGrid={true} brushColor={"#fa833e"} catenaryColor={"#ffffff"} brushRadius={brushSizeRange} />
+							<div className="absolute top-2 right-3 grid grid-cols-2 gap-3">
+								<div
+									className="w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer scale-100 active:scale-125 transition-all duration-300"
+									onClick={() => {
+										canvasRef.current.undo();
+									}}
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffffff" className="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+										<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+										<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+									</svg>
+								</div>
+								<div
+									className="w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer scale-100 active:scale-125 transition-all duration-300"
+									onClick={() => {
+										canvasRef.current.eraseAll();
+									}}
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffffff" class="bi bi-eraser" viewBox="0 0 16 16">
+										<path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z" />
+									</svg>
+								</div>
+								<div
+									className="w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer scale-100 active:scale-125 transition-all duration-300"
+									onClick={() => {
+										let outputImage = document.getElementById("outputImage");
+										outputImage.src = canvasRef.current.canvasContainer.children[1].toDataURL();
+										// resize outputImage.src
+										let tempImage = new Image();
+										tempImage.src = outputImage.src;
+										tempImage.onload = () => {
+											let tempCanvas = document.createElement("canvas");
+											tempCanvas.width = document.getElementById("outputImage").width;
+											tempCanvas.height = document.getElementById("outputImage").height;
+											console.log(tempCanvas.width, tempCanvas.height);
+											let tempCtx = tempCanvas.getContext("2d");
+											tempCtx.drawImage(tempImage, 0, 0, tempCanvas.width, tempCanvas.height);
+											let tempImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+											let tempData = tempImageData.data;
+											for (let i = 0; i < tempData.length; i += 4) {
+												if (tempData[i + 3] === 0) {
+													tempData[i] = 0;
+													tempData[i + 1] = 0;
+													tempData[i + 2] = 0;
+													tempData[i + 3] = 255;
+												} else {
+													tempData[i] = 255;
+													tempData[i + 1] = 255;
+													tempData[i + 2] = 255;
+													tempData[i + 3] = 255;
+												}
+											}
+											tempCtx.putImageData(tempImageData, 0, 0);
+											outputImage.src = tempCanvas.toDataURL();
+											console.log(outputImage.width, outputImage.height);
+
+											let dataURI = tempCanvas.toDataURL();
+											var byteString = atob(dataURI.split(",")[1]);
+											var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+											var ab = new ArrayBuffer(byteString.length);
+											var ia = new Uint8Array(ab);
+											for (var i = 0; i < byteString.length; i++) {
+												ia[i] = byteString.charCodeAt(i);
+											}
+											let tempBlob = new Blob([ab], { type: mimeString });
+
+											let imageInput = document.getElementById("imageInput");
+
+											var formdata = new FormData();
+											formdata.append("image", imageInput.files[0]);
+											formdata.append("mask", tempBlob);
+
+											var requestOptions = {
+												method: "POST",
+												body: formdata,
+												redirect: "follow",
+											};
+
+											fetch(process.env.REACT_APP_SERVER + "/api/cleanUp/", requestOptions)
+												.then((response) => response.blob())
+												.then((result) => {
+													outputImage.src = URL.createObjectURL(result);
+												})
+												.catch((error) => console.log("error", error));
+										};
+									}}
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-send" viewBox="0 0 16 16">
+										<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+									</svg>
+								</div>
+								<div
+									className="w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer scale-100 active:scale-125 transition-all duration-300"
+									onClick={() => {
+										canvasRef.current.eraseAll();
+									}}
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-download" viewBox="0 0 16 16">
+										<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+										<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+									</svg>
+								</div>
+							</div>
+							<div className="absolute bottom-3 left-4 flex items-center gap-3">
+								<div className="">
+									<input
+										type="range"
+										id="cowbell"
+										name="cowbell"
+										min="0"
+										max="100"
+										value={brushSizeRange}
+										onChangeCapture={(event) => {
+											setBrushSizeRange(event.target.value);
+										}}
+										className="CanvasDrawBrushSize"
+										style={{ background: "linear-gradient(to right, #fa833e 0%, #fa833e " + brushSizeRange + "%, #fff " + brushSizeRange + "%, #fff 100%)" }}
+									/>
+								</div>
 							</div>
 						</div>
 						<div className="w-full h-full p-5 pt-10">
 							<div className="flex flex-row justify-center gap-5"></div>
 						</div>
 					</div>
-					<Details removedBGData={removedBGData} />
+					{/* <Details removedBGData={removedBGData} /> */}
+					<img id="outputImage" src="" alt="" className="" />
 				</section>
 
 				{/* Use Cases Section */}

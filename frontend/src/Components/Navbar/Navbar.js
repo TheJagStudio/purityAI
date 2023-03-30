@@ -98,6 +98,23 @@ const Navbar = () => {
 											Text remover
 										</a>
 									</p>
+									<p className="text-[13px] font-semibold text-white py-2 px-7 cursor-pointer scale-100 hover:scale-110 transition-all duration-300 origin-left w-max">
+										<a className="flex flex-row gap-3 items-center hover:no-underline" href="/text-to-image">
+											<svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<g clip-path="url(#clip0_28_724)">
+													<path d="M8.399 3L12.799 14H10.644L9.443 11H5.353L4.154 14H2L6.399 3H8.399ZM7.399 5.885L6.152 9H8.644L7.399 5.885Z" fill="currentcolor"></path>
+													<path d="M7.625 12.5V20.3932C7.625 20.6611 7.73835 20.9131 7.93181 21.0951C8.12449 21.2765 8.38154 21.3748 8.6448 21.375H20.3552L20.358 21.375C20.6201 21.373 20.8751 21.2744 21.0669 21.0939C21.2594 20.9127 21.373 20.6625 21.375 20.3959V10.6068C21.375 10.0439 20.8969 9.625 20.3552 9.625H12.6646L13.4535 11.5972H19.325V16.471L16.5157 13.8249C16.322 13.6428 16.0639 13.5442 15.7993 13.5442C15.5348 13.5442 15.2766 13.6428 15.0829 13.8249L9.675 18.9104V15.6245L8.4278 12.5H7.625Z" fill="currentcolor"></path>
+													<path d="M17.8284 4.17157C17.0783 3.42143 16.0609 3 15 3H12V5H15C15.5304 5 16.0391 5.21071 16.4142 5.58579C16.7893 5.96086 17 6.46957 17 7V8.5H19V7C19 5.93913 18.5786 4.92172 17.8284 4.17157Z" fill="currentcolor"></path>
+												</g>
+												<defs>
+													<clipPath id="clip0_28_724">
+														<rect width="24" height="24" fill="white"></rect>
+													</clipPath>
+												</defs>
+											</svg>
+											Text To Image
+										</a>
+									</p>
 								</div>
 							</div>
 							{navLinks.map((link, index) => (

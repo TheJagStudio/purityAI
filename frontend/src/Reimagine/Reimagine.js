@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import JSZip from "jszip";
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,8 +8,13 @@ import "swiper/css/navigation";
 
 // Components
 import FunctionalityHeading from "../Components/FunctionalityHeading/FunctionalityHeading";
+import Details from "../Components/Details/Details";
+import Integration from "../Components/Integration/Integration";
+import Tools from "../Components/Tools/Tools";
 
 const Reimagine = () => {
+	document.title = "PurityAI | Reimagine";
+
 	const funcSVG = (
 		<svg width="1.875rem" height="1.875rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 			<path
@@ -17,10 +23,16 @@ const Reimagine = () => {
 			></path>
 		</svg>
 	);
+
+	const [activeImage, setActiveImage] = useState("/static/images/RB1.jpg");
 	const [clipWidth, setClipWidth] = useState(100);
 	const [useCaseInputValue, setUseCaseInputValue] = useState([50, 50, 50, 50]);
 	const [useCaseHilight, setUseCaseHighlight] = useState(0);
-	const [activeTab, setActiveTab] = useState("tab1");
+	const [images, setImages] = useState([]);
+	const [removedBGData, setRemovedBGData] = useState([]);
+	const [useCase1, setUseCase1] = useState("https://static.clipdrop.co/web/image-variants/use-cases/1.jpg");
+	const [useCase2, setUseCase2] = useState("https://static.clipdrop.co/web/image-variants/use-cases/2.jpg");
+	const [useCase3, setUseCase3] = useState("https://static.clipdrop.co/web/image-variants/use-cases/3.jpg");
 	let swiperRef = useRef();
 
 	const changeWidth = (event) => {
@@ -51,28 +63,47 @@ const Reimagine = () => {
 		};
 		document.getElementById("mainImageContainer").classList.remove("checker");
 		document.getElementById("inputImage").classList.add("animate-pulse");
-		document.getElementById("outputImage").classList.add("hidden");
 		setClipWidth(100);
-		fetch(process.env.REACT_APP_SERVER + "/api/backgroundRemover/", requestOptions)
-			.then((response) => response.blob())
-			.then((result) => {
-				document.getElementById("mainImageContainer").classList.add("checker");
-				let image = document.getElementById("outputImage");
-				image.src = URL.createObjectURL(result);
-				document.getElementById("inputImage").classList.remove("animate-pulse");
-				document.getElementById("outputImage").classList.remove("hidden");
-				setClipWidth(50);
+
+		fetch(process.env.REACT_APP_SERVER + "/api/reimagine/", requestOptions)
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+				return response.blob();
 			})
-			.catch((error) => console.log("error", error));
-		var requestOptions = {
-			method: "POST",
-			body: formdata,
-			redirect: "follow",
-		};
+			.then((blob) => {
+				const fileReader = new FileReader();
+				return new Promise((resolve, reject) => {
+					fileReader.onload = () => resolve(fileReader.result);
+					fileReader.onerror = () => reject(fileReader.error);
+					fileReader.readAsArrayBuffer(blob);
+				});
+			})
+			.then((arrayBuffer) => {
+				const zip = new JSZip();
+				return zip.loadAsync(arrayBuffer);
+			})
+			.then((zip) => {
+				const imageNames = Object.keys(zip.files).filter((name) => name.match(/\.(jpg|jpeg|png)$/i));
+				const promises = imageNames.map((name) => {
+					return zip.files[name].async("blob").then((src) => ({ name, src }));
+				});
+				return Promise.all(promises);
+			})
+			.then((extractedImages) => {
+				document.getElementById("inputImage").classList.remove("animate-pulse");
+				setImages(extractedImages);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 
 		fetch(process.env.REACT_APP_SERVER + "/api/visionAI/", requestOptions)
-			.then((response) => response.text())
-			.then((result) => console.log(result))
+			.then((response) => response.json())
+			.then((result) => {
+				setRemovedBGData(result["data"]);
+			})
 			.catch((error) => console.log("error", error));
 	}
 
@@ -102,7 +133,8 @@ const Reimagine = () => {
 	return (
 		<>
 			<section className="min-h-screen pb-10">
-				<FunctionalityHeading svg={funcSVG} func="Stable diffusion reimagine" funcDesc="Create multiple variations from a single image." funcIMG="/static/images/reimagine.jpg" />
+				<FunctionalityHeading svg={funcSVG} func="Reimagine" funcDesc="Create multiple variations from a single image." funcIMG="/static/images/reimagine.jpg" />
+
 				{/* Input Section */}
 				<section className="flex flex-1 flex-col sm:flex-row w-full gap-10 justify-center items-center sm:items-start sm:my-12 my-8 sm:px-12 px-8 overflow-hidden">
 					<div className="max-w-[850px] w-full flex-1 flex flex-col gap-5 items-center">
@@ -126,7 +158,6 @@ const Reimagine = () => {
 									toggleRmvBgDiv();
 									document.getElementById("mainImageContainer").classList.add("checker");
 									document.getElementById("inputImage").src = "/static/images/RB1.jpg";
-									document.getElementById("outputImage").src = "/static/images/RB1Trans.png";
 									document.getElementById("reimageImage").scrollIntoView({ behavior: "smooth", block: "center" });
 								}}
 								alt="use case 1"
@@ -143,7 +174,6 @@ const Reimagine = () => {
 									toggleRmvBgDiv();
 									document.getElementById("mainImageContainer").classList.add("checker");
 									document.getElementById("inputImage").src = "/static/images/RB2.jpg";
-									document.getElementById("outputImage").src = "/static/images/RB2Trans.png";
 									document.getElementById("reimageImage").scrollIntoView({ behavior: "smooth", block: "center" });
 								}}
 								alt="use case 2"
@@ -160,7 +190,6 @@ const Reimagine = () => {
 									toggleRmvBgDiv();
 									document.getElementById("mainImageContainer").classList.add("checker");
 									document.getElementById("inputImage").src = "/static/images/RB3.jpg";
-									document.getElementById("outputImage").src = "/static/images/RB3Trans.png";
 									document.getElementById("reimageImage").scrollIntoView({ behavior: "smooth", block: "center" });
 								}}
 								alt="use case 3"
@@ -177,7 +206,6 @@ const Reimagine = () => {
 									toggleRmvBgDiv();
 									document.getElementById("mainImageContainer").classList.add("checker");
 									document.getElementById("inputImage").src = "/static/images/RB4.jpg";
-									document.getElementById("outputImage").src = "/static/images/RB4Trans.png";
 									document.getElementById("reimageImage").scrollIntoView({ behavior: "smooth", block: "center" });
 								}}
 								alt="use case 4"
@@ -194,7 +222,7 @@ const Reimagine = () => {
 				</section>
 
 				{/* Output Section */}
-				<section className="relative flex flex-col md:flex-row max-w-[1200px] lg:w-full sm:w-[calc(100%-6rem)] w-[calc(100%-4rem)] h-0 p-0 overflow-hidden lg:mx-auto sm:mx-12 mx-8 md:gap-10 gap-5 justify-center items-center my-0 bg-dark-primary rounded-3xl transition-all duration-500" id="reimageImage">
+				<section className="relative flex flex-col md:flex-row max-w-[1200px] lg:w-full sm:w-[calc(100%-6rem)] w-[calc(100%-4rem)] h-0 p-0 overflow-hidden lg:mx-auto sm:mx-12 mx-8 md:gap-10 gap-5 justify-center my-0 bg-dark-primary rounded-3xl transition-all duration-500" id="reimageImage">
 					<div
 						className="absolute top-3 right-3 text-white bg-black z-10 bg-opacity-80 rounded-full p-1 cursor-pointer hover:opacity-70"
 						onClick={() => {
@@ -208,36 +236,74 @@ const Reimagine = () => {
 						</svg>
 					</div>
 					<div id="mainImageContainer" className="max-w-[400px] w-full h-full relative flex justify-center items-center rounded-xl overflow-hidden">
-						<img id="inputImage" src="" className="max-w-[400px] w-full h-auto" alt="" style={{ clipPath: `polygon(0px 0px, ` + clipWidth + `% 0px, ` + clipWidth + `% 100%, 0px 100%)` }} />
-						<img id="outputImage" src="" className="absolute max-w-[400px] w-full h-auto " alt="" />
-						<input type="range" className="RBSpliter absolute top-0 left-0 w-full h-full bg-transparent cursor-pointer" onChangeCapture={changeWidth} value={clipWidth} min={0} max={100} step={0.001} />
-						<button
-							className="px-4 cursor-pointer py-2 bg-secondary text-primary rounded-lg flex items-center justify-center gap-2 font-semibold absolute bottom-2 right-2"
-							onClick={async () => {
-								const imgSrc = document.querySelector("#outputImage").src;
-								const image = await fetch(imgSrc);
+						<div className="max-w-[500px] w-full h-full relative flex justify-center items-center gap-3 rounded-xl overflow-hidden">
+							<div className="relative max-w-[400px]">
+								<img id="inputImage" src="" className="max-w-[400px] w-full h-full rounded-lg" alt="" />
+								<svg
+									onClick={async () => {
+										const imgSrc = document.querySelector("#inputImage").src;
+										const image = await fetch(imgSrc);
 
-								const imageBlog = await image.blob();
-								const imageURL = URL.createObjectURL(imageBlog);
-								const link = document.createElement("a");
-								link.href = imageURL;
-								link.download = "transparent-image";
-								document.body.appendChild(link);
-								link.click();
-								document.body.removeChild(link);
-							}}
-						>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-download" viewBox="0 0 16 16">
-								<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-								<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-							</svg>
-							Download
-						</button>
+										const imageBlog = await image.blob();
+										//set the image to inputImage file
+										let newFile = new File([imageBlog], "image.jpg", { type: "image/jpeg" });
+										let newFileList = new DataTransfer();
+										newFileList.items.add(newFile);
+										document.getElementById("imageInput").files = newFileList.files;
+										reimage();
+									}}
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 20 20"
+									fill="#ffffff"
+									aria-hidden="true"
+									className="absolute top-1 right-1 bg-primary cursor-pointer p-[3px] rounded-full overflow-hidden active:-rotate-180 transition-all duration-300"
+									width="32"
+									height="32"
+								>
+									<path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd"></path>
+								</svg>
+								<button
+									className="px-4 cursor-pointer py-2 bg-secondary text-white rounded-lg flex items-center justify-center gap-2 font-semibold absolute bottom-2 right-2"
+									onClick={async () => {
+										const imgSrc = document.querySelector("#inputImage").src;
+										const image = await fetch(imgSrc);
+
+										const imageBlog = await image.blob();
+										const imageURL = URL.createObjectURL(imageBlog);
+										const link = document.createElement("a");
+										link.href = imageURL;
+										link.download = "image";
+										document.body.appendChild(link);
+										link.click();
+										document.body.removeChild(link);
+									}}
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-download" viewBox="0 0 16 16">
+										<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+										<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+									</svg>
+									Download
+								</button>
+							</div>
+							<div className="flex flex-col items-center gap-y-3">
+								{images.map((image, index) => (
+									<div className="relative" key={index}>
+										<img
+											src={URL.createObjectURL(image.src)}
+											className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (activeImage === image.src ? " border-secondary " : " border-dark-primary ")}
+											alt=""
+											onClick={() => {
+												setActiveImage(image.src);
+												document.getElementById("inputImage").src = URL.createObjectURL(image.src);
+											}}
+										/>
+									</div>
+								))}
+							</div>
+						</div>
 					</div>
 
-					<div className="w-full h-full md:mb-0 mb-3 flex flex-col md:gap-4 gap-2 text-white justify-center items-center">
-						<h1>Hello world</h1>
-					</div>
+					<Details removedBGData={removedBGData} />
 				</section>
 
 				{/* Use Cases Section */}
@@ -252,9 +318,9 @@ const Reimagine = () => {
 											swiperRef.current.swiper.slideTo(0);
 											setUseCaseHighlight(0);
 										}}
-										className={"py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-full  border-2 transition-colors " + (useCaseHilight === 0 ? "bg-white text-black" : "bg-transparent text-white") + "  text-left border-opacity-100 border-white hover:bg-white"}
+										className={"py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-full  border-2 transition-colors " + (useCaseHilight === 0 ? "bg-white text-black" : "bg-transparent text-white") + "  text-left border-opacity-100 border-white hover:bg-white hover:text-black"}
 									>
-										Product photography
+										Creative Agencies
 									</button>
 									<button
 										onClick={() => {
@@ -263,7 +329,7 @@ const Reimagine = () => {
 										}}
 										className={"py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-full  border-2 transition-colors " + (useCaseHilight === 1 ? "bg-white text-black" : "bg-transparent text-white") + "  text-left border-opacity-100 border-white hover:bg-white hover:text-black"}
 									>
-										Portraits
+										Website Illustration
 									</button>
 									<button
 										onClick={() => {
@@ -272,25 +338,7 @@ const Reimagine = () => {
 										}}
 										className={"py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-full  border-2 transition-colors " + (useCaseHilight === 2 ? "bg-white text-black" : "bg-transparent text-white") + "  text-left border-opacity-100 border-white hover:bg-white hover:text-black"}
 									>
-										Cars
-									</button>
-									<button
-										onClick={() => {
-											swiperRef.current.swiper.slideTo(3);
-											setUseCaseHighlight(3);
-										}}
-										className={"py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-full  border-2 transition-colors " + (useCaseHilight === 3 ? "bg-white text-black" : "bg-transparent text-white") + "  text-left border-opacity-100 border-white hover:bg-white hover:text-black"}
-									>
-										Clothes
-									</button>
-									<button
-										onClick={() => {
-											swiperRef.current.swiper.slideTo(4);
-											setUseCaseHighlight(4);
-										}}
-										className={"py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-full  border-2 transition-colors " + (useCaseHilight === 4 ? "bg-white text-black" : "bg-transparent text-white") + "  text-left border-opacity-100 border-white hover:bg-white hover:text-black"}
-									>
-										Furniture
+										Concept Art
 									</button>
 								</div>
 							</div>
@@ -298,12 +346,44 @@ const Reimagine = () => {
 								<SwiperSlide>
 									<div className="w-full h-full transition-transform duration-700" style={{ transform: `translateX(0)` }}>
 										<div className="md:min-w-[350px] flex flex-col justify-center">
-											<p className="text-[13px] font-semibold text-white text-center my-8 hidden sm:block">PurityAI design tools remove unwanted background for product photography. With customized background, you can take your product photos to the next level.</p>
-											<div className="flex gap-4 justify-around">
-												<div className="checker max-w-[400px] w-full h-[450px] relative flex justify-center items-center rounded-xl overflow-hidden">
-													<img src="/static/images/RBUC1.jpg" className="max-w-[400px] w-full h-auto" alt="" style={{ clipPath: `polygon(0px 0px, ` + useCaseInputValue[0] + `% 0px, ` + useCaseInputValue[0] + `% 100%, 0px 100%)` }} />
-													<img src="/static/images/RBUC1Trans.png" className="absolute max-w-[400px] w-full h-auto " alt="" />
-													<input type="range" className="RBSpliter absolute top-0 left-0 w-full h-full bg-transparent cursor-pointer" onChangeCapture={changeUseCase1} value={useCaseInputValue[0]} min={0} max={100} step={0.001} />
+											<p className="text-[13px] font-semibold text-white text-center my-8 hidden sm:block">Create a large number of variation for your customers.</p>
+											<div className="flex gap-4 items-center justify-center">
+												<div className="max-w-[400px] w-full h-[450px] relative flex justify-center items-center rounded-xl overflow-hidden">
+													<img src={useCase1} alt="" />
+												</div>
+												<div className="flex flex-col items-center gap-y-4">
+													<img
+														src="https://static.clipdrop.co/web/image-variants/use-cases/1.jpg"
+														alt=""
+														onClick={() => {
+															setUseCase1("https://static.clipdrop.co/web/image-variants/use-cases/1.jpg");
+														}}
+														className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase1 === "https://static.clipdrop.co/web/image-variants/use-cases/1.jpg" ? " border-secondary " : " border-primary ")}
+													/>
+													<img
+														src="https://static.clipdrop.co/web/image-variants/use-cases/1-1.jpg"
+														alt=""
+														onClick={() => {
+															setUseCase1("https://static.clipdrop.co/web/image-variants/use-cases/1-1.jpg");
+														}}
+														className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase1 === "https://static.clipdrop.co/web/image-variants/use-cases/1-1.jpg" ? " border-secondary " : " border-primary ")}
+													/>
+													<img
+														src="https://static.clipdrop.co/web/image-variants/use-cases/1-3.jpg"
+														alt=""
+														onClick={() => {
+															setUseCase1("https://static.clipdrop.co/web/image-variants/use-cases/1-3.jpg");
+														}}
+														className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase1 === "https://static.clipdrop.co/web/image-variants/use-cases/1-3.jpg" ? " border-secondary " : " border-primary ")}
+													/>
+													<img
+														src="https://static.clipdrop.co/web/image-variants/use-cases/1-2.jpg"
+														alt=""
+														onClick={() => {
+															setUseCase1("https://static.clipdrop.co/web/image-variants/use-cases/1-2.jpg");
+														}}
+														className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase1 === "https://static.clipdrop.co/web/image-variants/use-cases/1-2.jpg" ? " border-secondary " : " border-primary ")}
+													/>
 												</div>
 											</div>
 										</div>
@@ -312,14 +392,46 @@ const Reimagine = () => {
 								<SwiperSlide>
 									<div className="w-full h-full transition-transform duration-700" style={{ transform: `translateX(0)` }}>
 										<div className="md:min-w-[350px] flex flex-col justify-center">
-											<p className="text-[13px] font-semibold text-white text-center my-8">PurityAI background removal is the best algorithm to clean portraits pictures</p>
+											<p className="text-[13px] font-semibold text-white text-center my-8">Choose the perfect image to match your website layout.</p>
 											<div className="flex gap-4 justify-around">
 												<div className="checkerboard rounded-xl overflow-hidden">
 													<div className="relative h-full rounded-xl overflow-hidden">
-														<div className="checker max-w-[400px] w-full h-full relative flex justify-center items-center rounded-xl overflow-hidden">
-															<img src="/static/images/RBUC2.jpg" className="max-w-[400px] w-full h-auto" alt="" style={{ clipPath: `polygon(0px 0px, ` + useCaseInputValue[1] + `% 0px, ` + useCaseInputValue[1] + `% 100%, 0px 100%)` }} />
-															<img src="/static/images/RBUC2Trans.png" className="absolute max-w-[400px] w-full h-auto " alt="" />
-															<input type="range" className="RBSpliter absolute top-0 left-0 w-full h-full bg-transparent cursor-pointer" onChangeCapture={changeUseCase2} value={useCaseInputValue[1]} min={0} max={100} step={0.001} />
+														<div className="checker max-w-[550px] w-full relative flex justify-center items-center rounded-xl overflow-hidden">
+															<img src={useCase2} alt="" />
+														</div>
+														<div className="mt-4 flex items-center justify-between">
+															<img
+																src="https://static.clipdrop.co/web/image-variants/use-cases/2.jpg"
+																alt=""
+																onClick={() => {
+																	setUseCase2("https://static.clipdrop.co/web/image-variants/use-cases/2.jpg");
+																}}
+																className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase2 === "https://static.clipdrop.co/web/image-variants/use-cases/2.jpg" ? " border-secondary " : " border-primary ")}
+															/>
+															<img
+																src="https://static.clipdrop.co/web/image-variants/use-cases/2-1.jpg"
+																alt=""
+																onClick={() => {
+																	setUseCase2("https://static.clipdrop.co/web/image-variants/use-cases/2-1.jpg");
+																}}
+																className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase2 === "https://static.clipdrop.co/web/image-variants/use-cases/2-1.jpg" ? " border-secondary " : " border-primary ")}
+															/>
+															<img
+																src="https://static.clipdrop.co/web/image-variants/use-cases/2-2.jpg"
+																alt=""
+																onClick={() => {
+																	setUseCase2("https://static.clipdrop.co/web/image-variants/use-cases/2-2.jpg");
+																}}
+																className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase2 === "https://static.clipdrop.co/web/image-variants/use-cases/2-2.jpg" ? " border-secondary " : " border-primary ")}
+															/>
+															<img
+																src="https://static.clipdrop.co/web/image-variants/use-cases/2-3.jpg"
+																alt=""
+																onClick={() => {
+																	setUseCase2("https://static.clipdrop.co/web/image-variants/use-cases/2-3.jpg");
+																}}
+																className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase2 === "https://static.clipdrop.co/web/image-variants/use-cases/2-3.jpg" ? " border-secondary " : " border-primary ")}
+															/>
 														</div>
 													</div>
 												</div>
@@ -330,50 +442,46 @@ const Reimagine = () => {
 								<SwiperSlide>
 									<div className="w-full h-full transition-transform duration-700" style={{ transform: `translateX(0)` }}>
 										<div className="md:min-w-[350px] flex flex-col justify-center">
-											<p className="text-[13px] font-semibold text-white text-center my-8">PurityAI online background remover performs extremely well on cars</p>
+											<p className="text-[13px] font-semibold text-white text-center my-8">Make Amazing concept alternative in one click.</p>
 											<div className="flex gap-4 justify-around">
 												<div className="checkerboard rounded-xl overflow-hidden">
 													<div className="relative h-full rounded-xl overflow-hidden">
-														<div className="checker max-w-[400px] w-full h-[450px] relative flex justify-center items-center rounded-xl overflow-hidden">
-															<img src="/static/images/RBUC3.jpg" className="max-w-[400px] w-full h-auto" alt="" style={{ clipPath: `polygon(0px 0px, ` + useCaseInputValue[2] + `% 0px, ` + useCaseInputValue[2] + `% 100%, 0px 100%)` }} />
-															<img src="/static/images/RBUC3Trans.png" className="absolute max-w-[400px] w-full h-auto " alt="" />
-															<input type="range" className="RBSpliter absolute top-0 left-0 w-full h-full bg-transparent cursor-pointer" onChangeCapture={changeUseCase3} value={useCaseInputValue[2]} min={0} max={100} step={0.001} />
+														<div className="checker max-w-[550px] w-full relative flex justify-center items-center rounded-xl overflow-hidden">
+															<img src={useCase3} alt="" />
 														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</SwiperSlide>
-								<SwiperSlide>
-									<div className="w-full h-full transition-transform duration-700" style={{ transform: `translateX(0)` }}>
-										<div className="md:min-w-[350px] flex flex-col justify-center">
-											<p className="text-[13px] font-semibold text-white text-center my-8">The new PurityAI picture background remover tool is more powerful, accurate, and easier to use. The improved algorithm can help you remove background fast, and it's optimized for clothing.</p>
-											<div className="flex gap-4 justify-around">
-												<div className="checkerboard rounded-xl overflow-hidden">
-													<div className="relative h-full rounded-xl overflow-hidden">
-														<div className="checker max-w-[400px] w-full h-[450px] relative flex justify-center items-center rounded-xl overflow-hidden">
-															<img src="/static/images/RBUC4.jpg" className="max-w-[400px] w-full h-auto object-cover object-center" alt="" style={{ clipPath: `polygon(0px 0px, ` + useCaseInputValue[3] + `% 0px, ` + useCaseInputValue[3] + `% 100%, 0px 100%)` }} />
-															<img src="/static/images/RBUC4Trans.png" className="absolute max-w-[400px] w-full h-auto object-cover object-center" alt="" />
-															<input type="range" className="RBSpliter absolute top-0 left-0 w-full h-full bg-transparent cursor-pointer" onChangeCapture={changeUseCase4} value={useCaseInputValue[3]} min={0} max={100} step={0.001} />
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</SwiperSlide>
-								<SwiperSlide>
-									<div className="w-full h-full transition-transform duration-700" style={{ transform: `translateX(0)` }}>
-										<div className="md:min-w-[350px] flex flex-col justify-center">
-											<p className="text-[13px] font-semibold text-white text-center my-8">With PurityAI advanced computer vision algorithms, removing backgrounds of the most complex chair, bench, or any other furniture became easy!</p>
-											<div className="flex gap-4 justify-around">
-												<div className="checkerboard rounded-xl overflow-hidden">
-													<div className="relative h-full rounded-xl overflow-hidden">
-														<div className="checker max-w-[400px] w-full max-h-[475px] h-full relative flex justify-center items-center rounded-xl overflow-hidden">
-															<img src="/static/images/RBUC5.jpg" className="max-w-[400px] w-full h-auto" alt="" style={{ clipPath: `polygon(0px 0px, ` + useCaseInputValue[3] + `% 0px, ` + useCaseInputValue[3] + `% 100%, 0px 100%)` }} />
-															<img src="/static/images/RBUC5Trans.png" className="absolute max-w-[400px] w-full h-auto " alt="" />
-															<input type="range" className="RBSpliter absolute top-0 left-0 w-full h-full bg-transparent cursor-pointer" onChangeCapture={changeUseCase4} value={useCaseInputValue[3]} min={0} max={100} step={0.001} />
+														<div className="mt-4 flex items-center justify-between">
+															<img
+																src="https://static.clipdrop.co/web/image-variants/use-cases/3.jpg"
+																alt=""
+																onClick={() => {
+																	setUseCase3("https://static.clipdrop.co/web/image-variants/use-cases/3.jpg");
+																}}
+																className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase3 === "https://static.clipdrop.co/web/image-variants/use-cases/3.jpg" ? " border-secondary " : " border-primary ")}
+															/>
+															<img
+																src="https://static.clipdrop.co/web/image-variants/use-cases/3-1.jpg"
+																alt=""
+																onClick={() => {
+																	setUseCase3("https://static.clipdrop.co/web/image-variants/use-cases/3-1.jpg");
+																}}
+																className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase3 === "https://static.clipdrop.co/web/image-variants/use-cases/3-1.jpg" ? " border-secondary " : " border-primary ")}
+															/>
+															<img
+																src="https://static.clipdrop.co/web/image-variants/use-cases/3-2.jpg"
+																alt=""
+																onClick={() => {
+																	setUseCase3("https://static.clipdrop.co/web/image-variants/use-cases/3-2.jpg");
+																}}
+																className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase3 === "https://static.clipdrop.co/web/image-variants/use-cases/3-2.jpg" ? " border-secondary " : " border-primary ")}
+															/>
+															<img
+																src="https://static.clipdrop.co/web/image-variants/use-cases/3-3.jpg"
+																alt=""
+																onClick={() => {
+																	setUseCase3("https://static.clipdrop.co/web/image-variants/use-cases/3-3.jpg");
+																}}
+																className={"max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden rounded-lg object-cover w-full h-full border-2 cursor-pointer hover:opacity-80 " + (useCase3 === "https://static.clipdrop.co/web/image-variants/use-cases/3-3.jpg" ? " border-secondary " : " border-primary ")}
+															/>
 														</div>
 													</div>
 												</div>
@@ -385,6 +493,10 @@ const Reimagine = () => {
 						</div>
 					</div>
 				</section>
+
+				<Integration APItitle="Reimagine" iframeID1="" iframeID2="" iframeID3="" iframeID4="" iframeID5="" height1="" height2="" height3="" height4="" height5="" />
+
+				<Tools />
 			</section>
 		</>
 	);

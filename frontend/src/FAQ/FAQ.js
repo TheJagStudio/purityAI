@@ -1,6 +1,8 @@
 import React from "react";
 
 const FAQ = () => {
+	document.title = "PurityAI | Frequently Asked Questions";
+
 	const toggleFAQ = (event) => {
 		let faq = event.target.parentNode.getElementsByClassName("answer")[0];
 		let arrow = event.target.parentNode.getElementsByClassName("arrow")[0];

@@ -4,6 +4,16 @@ import TabNavItem from "../TabNavItem/TabNavItem";
 import TabContent from "../TabContent/TabContent";
 const Details = ({ removedBGData }) => {
 	const [activeTab, setActiveTab] = useState("tab1");
+	console.log(removedBGData);
+	if (removedBGData.length === 0) {
+		return (
+			<div className="w-full h-full flex items-center justify-center">
+				<div className="flex w-96 h-96 my-auto items-center justify-center rounded-full overflow-hidden mix-blend-screen" style={{ backgroundImage: "radial-gradient(transparent,#190c40 ,#190c40)" }}>
+					<img src="/static/images/loader.gif" alt="" className="w-full h-full object-cover mix-blend-difference scale-110" />
+				</div>
+			</div>
+		);
+	}
 	return (
 		<div className="w-full h-full md:mb-0 mb-3 my-8 md:gap-4 gap-2 text-white">
 			<ul className="flex items-center">
@@ -24,8 +34,8 @@ const Details = ({ removedBGData }) => {
 												<p className="text-sm text-white font-semibold">{label.description}</p>
 												<p className="text-sm text-white font-semibold">{parseInt(label.score * 100)}%</p>
 											</a>
-											<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-												<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: parseInt(label.score * 100) + "%" }}></div>
+											<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+												<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: parseInt(label.score * 100) + "%" }}></div>
 											</div>
 										</div>
 									))}
@@ -44,8 +54,8 @@ const Details = ({ removedBGData }) => {
 												<p className="text-sm text-white font-semibold capitalize">{label}</p>
 												<p className="text-sm text-white font-semibold lowercase">{removedBGData[item][label].replace(/_/g, " ")}</p>
 											</div>
-											<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-												<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(removedBGData[item][label]) + 1) * 20 + "%" }}></div>
+											<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+												<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(removedBGData[item][label]) + 1) * 20 + "%" }}></div>
 											</div>
 										</div>
 									))}
@@ -65,8 +75,8 @@ const Details = ({ removedBGData }) => {
 													<p className="text-sm text-white font-semibold">Joy</p>
 													<p className="text-sm text-white font-semibold lowercase">{face["joyLikelihood"].replace(/_/g, " ")}</p>
 												</div>
-												<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-													<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["joyLikelihood"]) + 1) * 20 + "%" }}></div>
+												<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+													<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["joyLikelihood"]) + 1) * 20 + "%" }}></div>
 												</div>
 											</div>
 											<div className="w-[70%]  my-1">
@@ -74,8 +84,8 @@ const Details = ({ removedBGData }) => {
 													<p className="text-sm text-white font-semibold">Sorrow</p>
 													<p className="text-sm text-white font-semibold lowercase">{face["sorrowLikelihood"].replace(/_/g, " ")}</p>
 												</div>
-												<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-													<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["sorrowLikelihood"]) + 1) * 20 + "%" }}></div>
+												<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+													<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["sorrowLikelihood"]) + 1) * 20 + "%" }}></div>
 												</div>
 											</div>
 											<div className="w-[70%]  my-1">
@@ -83,8 +93,8 @@ const Details = ({ removedBGData }) => {
 													<p className="text-sm text-white font-semibold">Anger</p>
 													<p className="text-sm text-white font-semibold lowercase">{face["angerLikelihood"].replace(/_/g, " ")}</p>
 												</div>
-												<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-													<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["angerLikelihood"]) + 1) * 20 + "%" }}></div>
+												<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+													<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["angerLikelihood"]) + 1) * 20 + "%" }}></div>
 												</div>
 											</div>
 											<div className="w-[70%]  my-1">
@@ -92,8 +102,8 @@ const Details = ({ removedBGData }) => {
 													<p className="text-sm text-white font-semibold">Surprise</p>
 													<p className="text-sm text-white font-semibold lowercase">{face["surpriseLikelihood"].replace(/_/g, " ")}</p>
 												</div>
-												<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-													<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["surpriseLikelihood"]) + 1) * 20 + "%" }}></div>
+												<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+													<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["surpriseLikelihood"]) + 1) * 20 + "%" }}></div>
 												</div>
 											</div>
 											<div className="w-[70%]  my-1">
@@ -101,8 +111,8 @@ const Details = ({ removedBGData }) => {
 													<p className="text-sm text-white font-semibold">Under Exposed</p>
 													<p className="text-sm text-white font-semibold lowercase">{face["underExposedLikelihood"].replace(/_/g, " ")}</p>
 												</div>
-												<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-													<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["underExposedLikelihood"]) + 1) * 20 + "%" }}></div>
+												<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+													<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["underExposedLikelihood"]) + 1) * 20 + "%" }}></div>
 												</div>
 											</div>
 											<div className="w-[70%]  my-1">
@@ -110,8 +120,8 @@ const Details = ({ removedBGData }) => {
 													<p className="text-sm text-white font-semibold">Blurred</p>
 													<p className="text-sm text-white font-semibold lowercase">{face["blurredLikelihood"].replace(/_/g, " ")}</p>
 												</div>
-												<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-													<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["blurredLikelihood"]) + 1) * 20 + "%" }}></div>
+												<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+													<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["blurredLikelihood"]) + 1) * 20 + "%" }}></div>
 												</div>
 											</div>
 											<div className="w-[70%]  my-2">
@@ -119,8 +129,8 @@ const Details = ({ removedBGData }) => {
 													<p className="text-sm text-white font-semibold">Headwear</p>
 													<p className="text-sm text-white font-semibold lowercase">{face["headwearLikelihood"].replace(/_/g, " ")}</p>
 												</div>
-												<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-													<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["headwearLikelihood"]) + 1) * 20 + "%" }}></div>
+												<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+													<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: (dataList.indexOf(face["headwearLikelihood"]) + 1) * 20 + "%" }}></div>
 												</div>
 											</div>
 											<div className="w-[70%]  my-4">
@@ -141,8 +151,8 @@ const Details = ({ removedBGData }) => {
 													<p className="text-sm text-white font-semibold">Detection Confidence</p>
 													<p className="text-sm text-white font-semibold lowercase">{parseInt(face["detectionConfidence"] * 100)}%</p>
 												</div>
-												<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-													<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: parseInt(face["detectionConfidence"] * 100) + "%" }}></div>
+												<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+													<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: parseInt(face["detectionConfidence"] * 100) + "%" }}></div>
 												</div>
 											</div>
 										</div>
@@ -161,8 +171,8 @@ const Details = ({ removedBGData }) => {
 												<p className="text-sm text-white font-semibold">{label.name}</p>
 												<p className="text-sm text-white font-semibold">{parseInt(label.score * 100)}%</p>
 											</div>
-											<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-												<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: parseInt(label.score * 100) + "%" }}></div>
+											<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+												<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: parseInt(label.score * 100) + "%" }}></div>
 											</div>
 										</div>
 									))}
@@ -180,8 +190,8 @@ const Details = ({ removedBGData }) => {
 												<p className="text-sm text-white font-semibold">{label.description}</p>
 												<p className="text-sm text-white font-semibold">{parseInt(label.score * 100)}%</p>
 											</div>
-											<div class="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
-												<div class={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: parseInt(label.score * 100) + "%" }}></div>
+											<div className="h-2 w-full bg-primary rounded-full relative overflow-hidden my-2">
+												<div className={"absolute left-0 h-full bg-secondary rounded-full"} style={{ width: parseInt(label.score * 100) + "%" }}></div>
 											</div>
 										</div>
 									))}

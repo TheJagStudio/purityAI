@@ -15,6 +15,8 @@ import Integration from "../Components/Integration/Integration";
 import { RBSD1, RBSD2, RBSD3, RBSD4 } from "../Variables/Variables";
 
 const RemoveBackground = () => {
+	document.title = "PurityAI | Remove Background";
+
 	const [clipWidth, setClipWidth] = useState(100);
 	const [useCaseInputValue, setUseCaseInputValue] = useState([50, 50, 50, 50]);
 	const [useCaseHilight, setUseCaseHighlight] = useState(0);
@@ -72,7 +74,6 @@ const RemoveBackground = () => {
 			.then((response) => response.json())
 			.then((result) => {
 				setRemovedBGData(result["data"]);
-				console.log(removedBGData);
 			})
 			.catch((error) => console.log("error", error));
 	}
@@ -123,7 +124,7 @@ const RemoveBackground = () => {
 				<section className="flex flex-1 flex-col sm:flex-row w-full gap-10 justify-center items-center sm:items-start sm:my-12 my-8 sm:px-12 px-8 overflow-hidden">
 					<div className="max-w-[850px] w-full flex-1 flex flex-col gap-5 items-center">
 						<div className="rounded-3xl overflow-hidden border-4 border-white border-dashed w-full">
-							<div className="flex flex-col justify-center items-center text-center cursor-pointer w-full h-fitoverflow-hidden">
+							<div className="flex flex-col justify-center items-center text-center cursor-pointer w-full h-fit overflow-hidden">
 								<label htmlFor="imageInput" className="md:text-lg font-semibold text-white text-center opacity-100 px-7 py-7 sm:py-14 select-none w-full cursor-pointer bg-dark-primary hover:bg-transparent transition-colors duration-200">
 									Click, paste or drop image here to start.
 								</label>
@@ -241,7 +242,7 @@ const RemoveBackground = () => {
 								const imageURL = URL.createObjectURL(imageBlog);
 								const link = document.createElement("a");
 								link.href = imageURL;
-								link.download = "transparent-image";
+								link.download = "image";
 								document.body.appendChild(link);
 								link.click();
 								document.body.removeChild(link);

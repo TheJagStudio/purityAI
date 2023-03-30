@@ -1,17 +1,21 @@
 import React, { useState, useRef } from "react";
-import { Navigation } from "swiper";
 
+// Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-import Tools from "../Components/Tools/Tools";
-import Details from "../Components/Details/Details";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 
 // Components
+import Tools from "../Components/Tools/Tools";
+import Details from "../Components/Details/Details";
 import FunctionalityHeading from "../Components/FunctionalityHeading/FunctionalityHeading";
+import Integration from "../Components/Integration/Integration";
+
+import { TRSD1, TRSD2, TRSD3, TRSD4 } from "../Variables/Variables";
 
 const RemoveText = () => {
+	document.title = "PurityAI | Text Remover";
+
 	const [clipWidth, setClipWidth] = useState(50);
 	const [useCaseInputValue, setUseCaseInputValue] = useState([50, 50, 50, 50]);
 	const [useCaseHilight, setUseCaseHighlight] = useState(0);
@@ -74,6 +78,7 @@ const RemoveText = () => {
 
 	const handleFileChange = () => {
 		try {
+			setRemovedBGData([]);
 			const rmvBgDiv = document.getElementById("removeTextImage");
 			const file = document.getElementById("imageInput").files[0];
 			const reader = new FileReader();
@@ -137,6 +142,7 @@ const RemoveText = () => {
 									document.getElementById("inputImage").src = "/static/images/TR1.jpg";
 									document.getElementById("outputImage").src = "/static/images/TR1Trans.png";
 									document.getElementById("removeTextImage").scrollIntoView({ behavior: "smooth", block: "center" });
+									setRemovedBGData(TRSD1);
 								}}
 								alt="use case 1"
 								loading="lazy"
@@ -153,6 +159,7 @@ const RemoveText = () => {
 									document.getElementById("inputImage").src = "/static/images/TR2.jpg";
 									document.getElementById("outputImage").src = "/static/images/TR2Trans.png";
 									document.getElementById("removeTextImage").scrollIntoView({ behavior: "smooth", block: "center" });
+									setRemovedBGData(TRSD2);
 								}}
 								alt="use case 2"
 								loading="lazy"
@@ -169,6 +176,7 @@ const RemoveText = () => {
 									document.getElementById("inputImage").src = "/static/images/TR3.jpg";
 									document.getElementById("outputImage").src = "/static/images/TR3Trans.png";
 									document.getElementById("removeTextImage").scrollIntoView({ behavior: "smooth", block: "center" });
+									setRemovedBGData(TRSD3);
 								}}
 								alt="use case 3"
 								loading="lazy"
@@ -185,6 +193,7 @@ const RemoveText = () => {
 									document.getElementById("inputImage").src = "/static/images/TR4.jpg";
 									document.getElementById("outputImage").src = "/static/images/TR4Trans.png";
 									document.getElementById("removeTextImage").scrollIntoView({ behavior: "smooth", block: "center" });
+									setRemovedBGData(TRSD4);
 								}}
 								alt="use case 4"
 								loading="lazy"
@@ -230,7 +239,7 @@ const RemoveText = () => {
 								const imageURL = URL.createObjectURL(imageBlog);
 								const link = document.createElement("a");
 								link.href = imageURL;
-								link.download = "transparent-image";
+								link.download = "image";
 								document.body.appendChild(link);
 								link.click();
 								document.body.removeChild(link);
@@ -377,6 +386,8 @@ const RemoveText = () => {
 						</div>
 					</div>
 				</section>
+
+				<Integration APItitle="Text Removal" iframeID1="EZb7cIJ44I6Er8koVocV" iframeID2="dSvOqgRDuIRqqCgeykSY" iframeID3="7OQE9FTX0qjhOb7WpUS7" iframeID4="dGXyL6eDvGrCQvstaHOY" iframeID5="OKbLva2Gq4gRP4FXgz1X" height1="130px" height2="310px" height3="350px" height4="420px" height5="260px" />
 				<Tools />
 			</section>
 		</>

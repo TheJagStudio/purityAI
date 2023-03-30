@@ -3676,3 +3676,1082 @@ export const RBSD4 = {
 		},
 	],
 };
+
+// Text Remover
+export const TRSD1 = {
+	Label: [
+		{
+			mid: "/m/01jwgf",
+			description: "Product",
+			score: 0.9074658,
+			topicality: 0.9074658,
+		},
+		{
+			mid: "/m/01g5v",
+			description: "Blue",
+			score: 0.8918777,
+			topicality: 0.8918777,
+		},
+		{
+			mid: "/m/0244x1",
+			description: "Gesture",
+			score: 0.85260487,
+			topicality: 0.85260487,
+		},
+		{
+			mid: "/m/03gq5hm",
+			description: "Font",
+			score: 0.8374464,
+			topicality: 0.8374464,
+		},
+		{
+			mid: "/m/03scnj",
+			description: "Line",
+			score: 0.817793,
+			topicality: 0.817793,
+		},
+		{
+			mid: "/m/02vwbzz",
+			description: "Electric blue",
+			score: 0.7556344,
+			topicality: 0.7556344,
+		},
+		{
+			mid: "/m/0j62f",
+			description: "Rectangle",
+			score: 0.69733125,
+			topicality: 0.69733125,
+		},
+		{
+			mid: "/m/0dwx7",
+			description: "Logo",
+			score: 0.68549716,
+			topicality: 0.68549716,
+		},
+		{
+			mid: "/m/081pkj",
+			description: "Event",
+			score: 0.66928256,
+			topicality: 0.66928256,
+		},
+		{
+			mid: "/m/01cd9",
+			description: "Brand",
+			score: 0.6628633,
+			topicality: 0.6628633,
+		},
+		{
+			mid: "/m/021sdg",
+			description: "Graphics",
+			score: 0.66171783,
+			topicality: 0.66171783,
+		},
+		{
+			mid: "/m/0hcr",
+			description: "Animation",
+			score: 0.6253157,
+			topicality: 0.6253157,
+		},
+		{
+			mid: "/m/044_87",
+			description: "Output device",
+			score: 0.61739045,
+			topicality: 0.61739045,
+		},
+		{
+			mid: "/m/01kr8f",
+			description: "Illustration",
+			score: 0.61529404,
+			topicality: 0.61529404,
+		},
+		{
+			mid: "/m/01yttv",
+			description: "Audio equipment",
+			score: 0.6027125,
+			topicality: 0.6027125,
+		},
+		{
+			mid: "/m/03c31",
+			description: "Graphic design",
+			score: 0.59843063,
+			topicality: 0.59843063,
+		},
+		{
+			mid: "/m/011s0",
+			description: "Advertising",
+			score: 0.5842718,
+			topicality: 0.5842718,
+		},
+		{
+			mid: "/m/09ddf",
+			description: "Symbol",
+			score: 0.58128864,
+			topicality: 0.58128864,
+		},
+		{
+			mid: "/m/0138tl",
+			description: "Toy",
+			score: 0.5423914,
+			topicality: 0.5423914,
+		},
+		{
+			mid: "/m/04115t2",
+			description: "Job",
+			score: 0.5343423,
+			topicality: 0.5343423,
+		},
+		{
+			mid: "/m/0541p",
+			description: "Multimedia",
+			score: 0.5119819,
+			topicality: 0.5119819,
+		},
+	],
+	Text: "Mastering CSS\nImage Overlays",
+	"Safe Search": {
+		adult: "VERY_UNLIKELY",
+		spoof: "VERY_UNLIKELY",
+		medical: "UNLIKELY",
+		violence: "VERY_UNLIKELY",
+		racy: "VERY_UNLIKELY",
+	},
+	Object: [
+		{
+			mid: "/m/01g317",
+			name: "Person",
+			score: 0.627155,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.19233818,
+						y: 0.49914345,
+					},
+					{
+						x: 0.26557967,
+						y: 0.49914345,
+					},
+					{
+						x: 0.26557967,
+						y: 0.75884336,
+					},
+					{
+						x: 0.19233818,
+						y: 0.75884336,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/01g317",
+			name: "Person",
+			score: 0.56375027,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.27808326,
+						y: 0.44992602,
+					},
+					{
+						x: 0.34836403,
+						y: 0.44992602,
+					},
+					{
+						x: 0.34836403,
+						y: 0.6753102,
+					},
+					{
+						x: 0.27808326,
+						y: 0.6753102,
+					},
+				],
+			},
+		},
+	],
+};
+export const TRSD2 = {
+	Label: [
+		{
+			mid: "/m/09ggk",
+			description: "Purple",
+			score: 0.89674824,
+			topicality: 0.89674824,
+		},
+		{
+			mid: "/m/09gg3",
+			description: "Violet",
+			score: 0.843857,
+			topicality: 0.843857,
+		},
+		{
+			mid: "/m/09nm_",
+			description: "World",
+			score: 0.84096265,
+			topicality: 0.84096265,
+		},
+		{
+			mid: "/m/03scnj",
+			description: "Line",
+			score: 0.8156766,
+			topicality: 0.8156766,
+		},
+		{
+			mid: "/m/03gq5hm",
+			description: "Font",
+			score: 0.80965453,
+			topicality: 0.80965453,
+		},
+		{
+			mid: "/m/0ckc5",
+			description: "Magenta",
+			score: 0.8055073,
+			topicality: 0.8055073,
+		},
+		{
+			mid: "/m/07c1v",
+			description: "Technology",
+			score: 0.74079233,
+			topicality: 0.74079233,
+		},
+		{
+			mid: "/m/06wqb",
+			description: "Space",
+			score: 0.7262636,
+			topicality: 0.7262636,
+		},
+		{
+			mid: "/m/081pkj",
+			description: "Event",
+			score: 0.7168828,
+			topicality: 0.7168828,
+		},
+		{
+			mid: "/m/0jjw",
+			description: "Art",
+			score: 0.7160034,
+			topicality: 0.7160034,
+		},
+		{
+			mid: "/m/01cd9",
+			description: "Brand",
+			score: 0.6720547,
+			topicality: 0.6720547,
+		},
+		{
+			mid: "/m/021sdg",
+			description: "Graphics",
+			score: 0.66985214,
+			topicality: 0.66985214,
+		},
+		{
+			mid: "/m/02vwbzz",
+			description: "Electric blue",
+			score: 0.6637465,
+			topicality: 0.6637465,
+		},
+		{
+			mid: "/m/0dwx7",
+			description: "Logo",
+			score: 0.63653624,
+			topicality: 0.63653624,
+		},
+		{
+			mid: "/m/01vkl",
+			description: "Circle",
+			score: 0.6159698,
+			topicality: 0.6159698,
+		},
+		{
+			mid: "/m/011s0",
+			description: "Advertising",
+			score: 0.5996028,
+			topicality: 0.5996028,
+		},
+		{
+			mid: "/m/03c31",
+			description: "Graphic design",
+			score: 0.5937535,
+			topicality: 0.5937535,
+		},
+		{
+			mid: "/m/0hcr",
+			description: "Animation",
+			score: 0.58258367,
+			topicality: 0.58258367,
+		},
+		{
+			mid: "/m/0hwky",
+			description: "Pattern",
+			score: 0.5682873,
+			topicality: 0.5682873,
+		},
+		{
+			mid: "/m/06ht1",
+			description: "Room",
+			score: 0.5565608,
+			topicality: 0.5565608,
+		},
+	],
+	Text: "Ellen Macpherson\nJust another tech blog.\nRead more.",
+	"Safe Search": {
+		adult: "VERY_UNLIKELY",
+		spoof: "VERY_UNLIKELY",
+		medical: "UNLIKELY",
+		violence: "UNLIKELY",
+		racy: "VERY_UNLIKELY",
+	},
+	Object: [
+		{
+			mid: "/j/5qg9b8",
+			name: "Packaged goods",
+			score: 0.5482533,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.00020947748,
+						y: 0.34062818,
+					},
+					{
+						x: 0.12533753,
+						y: 0.34062818,
+					},
+					{
+						x: 0.12533753,
+						y: 0.76927584,
+					},
+					{
+						x: 0.00020947748,
+						y: 0.76927584,
+					},
+				],
+			},
+		},
+		{
+			mid: "/j/5qg9b8",
+			name: "Packaged goods",
+			score: 0.5245054,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.17992462,
+						y: 0.70039874,
+					},
+					{
+						x: 0.29447713,
+						y: 0.70039874,
+					},
+					{
+						x: 0.29447713,
+						y: 0.8407422,
+					},
+					{
+						x: 0.17992462,
+						y: 0.8407422,
+					},
+				],
+			},
+		},
+	],
+};
+export const TRSD3 = {
+	Label: [
+		{
+			mid: "/m/0244x1",
+			description: "Gesture",
+			score: 0.85260487,
+			topicality: 0.85260487,
+		},
+		{
+			mid: "/m/03gq5hm",
+			description: "Font",
+			score: 0.8345887,
+			topicality: 0.8345887,
+		},
+		{
+			mid: "/m/09cx8",
+			description: "Finger",
+			score: 0.8305741,
+			topicality: 0.8305741,
+		},
+		{
+			mid: "/m/02mf1n",
+			description: "Gadget",
+			score: 0.81805617,
+			topicality: 0.81805617,
+		},
+		{
+			mid: "/m/01n32",
+			description: "City",
+			score: 0.7479314,
+			topicality: 0.7479314,
+		},
+		{
+			mid: "/m/081pkj",
+			description: "Event",
+			score: 0.73766184,
+			topicality: 0.73766184,
+		},
+		{
+			mid: "/m/0ckc5",
+			description: "Magenta",
+			score: 0.72468245,
+			topicality: 0.72468245,
+		},
+		{
+			mid: "/m/02vwbzz",
+			description: "Electric blue",
+			score: 0.7217659,
+			topicality: 0.7217659,
+		},
+		{
+			mid: "/m/03qtwd",
+			description: "Crowd",
+			score: 0.71486866,
+			topicality: 0.71486866,
+		},
+		{
+			mid: "/m/023j4r",
+			description: "Nail",
+			score: 0.6987115,
+			topicality: 0.6987115,
+		},
+		{
+			mid: "/m/02cwm",
+			description: "Design",
+			score: 0.685247,
+			topicality: 0.685247,
+		},
+		{
+			mid: "/m/017r8p",
+			description: "Pedestrian",
+			score: 0.6766633,
+			topicality: 0.6766633,
+		},
+		{
+			mid: "/m/01c8br",
+			description: "Street",
+			score: 0.65691733,
+			topicality: 0.65691733,
+		},
+		{
+			mid: "/m/06gfj",
+			description: "Road",
+			score: 0.636788,
+			topicality: 0.636788,
+		},
+		{
+			mid: "/m/029zz6",
+			description: "Display device",
+			score: 0.6367677,
+			topicality: 0.6367677,
+		},
+		{
+			mid: "/m/0glmwd6",
+			description: "Communication Device",
+			score: 0.62220067,
+			topicality: 0.62220067,
+		},
+		{
+			mid: "/m/0ds99lh",
+			description: "Fun",
+			score: 0.6115798,
+			topicality: 0.6115798,
+		},
+		{
+			mid: "/m/011s0",
+			description: "Advertising",
+			score: 0.6081852,
+			topicality: 0.6081852,
+		},
+		{
+			mid: "/m/01cd9",
+			description: "Brand",
+			score: 0.5992025,
+			topicality: 0.5992025,
+		},
+		{
+			mid: "/m/06bm2",
+			description: "Recreation",
+			score: 0.57774055,
+			topicality: 0.57774055,
+		},
+		{
+			mid: "/m/0541p",
+			description: "Multimedia",
+			score: 0.55981785,
+			topicality: 0.55981785,
+		},
+		{
+			mid: "/g/116c3n66l",
+			description: "Public event",
+			score: 0.52286416,
+			topicality: 0.52286416,
+		},
+		{
+			mid: "/m/0dwx7",
+			description: "Logo",
+			score: 0.52212626,
+			topicality: 0.52212626,
+		},
+	],
+	Logo: [
+		{
+			mid: "/m/04y04k",
+			description: "Alamy",
+			score: 0.7337307,
+			boundingPoly: {
+				vertices: [
+					{
+						x: 144,
+						y: 266,
+					},
+					{
+						x: 268,
+						y: 266,
+					},
+					{
+						x: 268,
+						y: 332,
+					},
+					{
+						x: 144,
+						y: 332,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/04y04k",
+			description: "Alamy",
+			score: 0.68197334,
+			boundingPoly: {
+				vertices: [
+					{
+						x: 43,
+						y: 877,
+					},
+					{
+						x: 156,
+						y: 877,
+					},
+					{
+						x: 156,
+						y: 942,
+					},
+					{
+						x: 43,
+						y: 942,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/04y04k",
+			description: "Alamy",
+			score: 0.6141558,
+			boundingPoly: {
+				vertices: [
+					{
+						x: 1,
+						y: 657,
+					},
+					{
+						x: 108,
+						y: 657,
+					},
+					{
+						x: 108,
+						y: 721,
+					},
+					{
+						x: 1,
+						y: 721,
+					},
+				],
+			},
+		},
+	],
+	Text: "a\na\nalamy\na\nalamu\nalamy\na\na\na\na\na\na\na\na\nHIPSTER\nalamy\na\na\na\na\na\nalamy\nalamu\na\na\nImage ID: PYOP8G\nwww.alamy.com",
+	"Safe Search": {
+		adult: "VERY_UNLIKELY",
+		spoof: "VERY_UNLIKELY",
+		medical: "UNLIKELY",
+		violence: "VERY_UNLIKELY",
+		racy: "VERY_UNLIKELY",
+	},
+	Object: [
+		{
+			mid: "/j/5qg9b8",
+			name: "Packaged goods",
+			score: 0.88244605,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.352118,
+						y: 0.2700536,
+					},
+					{
+						x: 0.6349625,
+						y: 0.2700536,
+					},
+					{
+						x: 0.6349625,
+						y: 0.5384751,
+					},
+					{
+						x: 0.352118,
+						y: 0.5384751,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/01g317",
+			name: "Person",
+			score: 0.5929626,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.7742429,
+						y: 0.3306409,
+					},
+					{
+						x: 0.9233048,
+						y: 0.3306409,
+					},
+					{
+						x: 0.9233048,
+						y: 0.9008779,
+					},
+					{
+						x: 0.7742429,
+						y: 0.9008779,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/01g317",
+			name: "Person",
+			score: 0.5564136,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.90692854,
+						y: 0.34458217,
+					},
+					{
+						x: 0.9972775,
+						y: 0.34458217,
+					},
+					{
+						x: 0.9972775,
+						y: 0.90429664,
+					},
+					{
+						x: 0.90692854,
+						y: 0.90429664,
+					},
+				],
+			},
+		},
+	],
+};
+export const TRSD4 = {
+	Label: [
+		{
+			mid: "/m/04k84",
+			description: "Light",
+			score: 0.9110556,
+			topicality: 0.9110556,
+		},
+		{
+			mid: "/m/04d01f",
+			description: "Amber",
+			score: 0.90483785,
+			topicality: 0.90483785,
+		},
+		{
+			mid: "/m/0cgh4",
+			description: "Building",
+			score: 0.9022952,
+			topicality: 0.9022952,
+		},
+		{
+			mid: "/m/0d4v4",
+			description: "Window",
+			score: 0.7762563,
+			topicality: 0.7762563,
+		},
+		{
+			mid: "/m/02q_bfg",
+			description: "Tints and shades",
+			score: 0.76966584,
+			topicality: 0.76966584,
+		},
+		{
+			mid: "/m/01n32",
+			description: "City",
+			score: 0.7632195,
+			topicality: 0.7632195,
+		},
+		{
+			mid: "/m/02lts",
+			description: "Electricity",
+			score: 0.7482144,
+			topicality: 0.7482144,
+		},
+		{
+			mid: "/m/07j7r",
+			description: "Tree",
+			score: 0.7378324,
+			topicality: 0.7378324,
+		},
+		{
+			mid: "/m/081pkj",
+			description: "Event",
+			score: 0.73464835,
+			topicality: 0.73464835,
+		},
+		{
+			mid: "/m/03qtwd",
+			description: "Crowd",
+			score: 0.70122224,
+			topicality: 0.70122224,
+		},
+		{
+			mid: "/m/01kv7h",
+			description: "Midnight",
+			score: 0.67548,
+			topicality: 0.67548,
+		},
+		{
+			mid: "/m/0d9wj",
+			description: "Urban design",
+			score: 0.6650725,
+			topicality: 0.6650725,
+		},
+		{
+			mid: "/m/01d74z",
+			description: "Night",
+			score: 0.6443761,
+			topicality: 0.6443761,
+		},
+		{
+			mid: "/m/03gq5hm",
+			description: "Font",
+			score: 0.628685,
+			topicality: 0.628685,
+		},
+		{
+			mid: "/m/04mx32",
+			description: "Evening",
+			score: 0.6177467,
+			topicality: 0.6177467,
+		},
+		{
+			mid: "/m/0jjw",
+			description: "Art",
+			score: 0.61709315,
+			topicality: 0.61709315,
+		},
+		{
+			mid: "/m/0c1vxg",
+			description: "Mixed-use",
+			score: 0.5978868,
+			topicality: 0.5978868,
+		},
+		{
+			mid: "/m/033rq4",
+			description: "Street light",
+			score: 0.59445643,
+			topicality: 0.59445643,
+		},
+		{
+			mid: "/m/08jpwt",
+			description: "Light fixture",
+			score: 0.5928193,
+			topicality: 0.5928193,
+		},
+		{
+			mid: "/m/01c8br",
+			description: "Street",
+			score: 0.5610791,
+			topicality: 0.5610791,
+		},
+		{
+			mid: "/m/0hr5k",
+			description: "Festival",
+			score: 0.52127147,
+			topicality: 0.52127147,
+		},
+		{
+			mid: "/m/013x8v",
+			description: "Fan",
+			score: 0.5055259,
+			topicality: 0.5055259,
+		},
+	],
+	Text: "A Movie in the Park:\nKung Fu Panda",
+	"Safe Search": {
+		adult: "VERY_UNLIKELY",
+		spoof: "VERY_UNLIKELY",
+		medical: "VERY_UNLIKELY",
+		violence: "VERY_UNLIKELY",
+		racy: "VERY_UNLIKELY",
+	},
+	Object: [
+		{
+			mid: "/m/0k4j",
+			name: "Car",
+			score: 0.71951026,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.793912,
+						y: 0.4948217,
+					},
+					{
+						x: 0.9446673,
+						y: 0.4948217,
+					},
+					{
+						x: 0.9446673,
+						y: 0.59296376,
+					},
+					{
+						x: 0.793912,
+						y: 0.59296376,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/0k4j",
+			name: "Car",
+			score: 0.68674403,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.6193855,
+						y: 0.47221872,
+					},
+					{
+						x: 0.75948304,
+						y: 0.47221872,
+					},
+					{
+						x: 0.75948304,
+						y: 0.5702513,
+					},
+					{
+						x: 0.6193855,
+						y: 0.5702513,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/01g317",
+			name: "Person",
+			score: 0.6531554,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.4398152,
+						y: 0.81560475,
+					},
+					{
+						x: 0.5098826,
+						y: 0.81560475,
+					},
+					{
+						x: 0.5098826,
+						y: 0.9766436,
+					},
+					{
+						x: 0.4398152,
+						y: 0.9766436,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/0k4j",
+			name: "Car",
+			score: 0.60563254,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.4659128,
+						y: 0.47107887,
+					},
+					{
+						x: 0.5876137,
+						y: 0.47107887,
+					},
+					{
+						x: 0.5876137,
+						y: 0.5549812,
+					},
+					{
+						x: 0.4659128,
+						y: 0.5549812,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/0cgh4",
+			name: "Building",
+			score: 0.5481878,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.5741022,
+						y: 0.014847553,
+					},
+					{
+						x: 0.9894549,
+						y: 0.014847553,
+					},
+					{
+						x: 0.9894549,
+						y: 0.4284177,
+					},
+					{
+						x: 0.5741022,
+						y: 0.4284177,
+					},
+				],
+			},
+		},
+		{
+			mid: "/m/0cgh4",
+			name: "Building",
+			score: 0.5262783,
+			boundingPoly: {
+				normalizedVertices: [
+					{
+						x: 0.008237877,
+						y: 0.08365815,
+					},
+					{
+						x: 0.40175366,
+						y: 0.08365815,
+					},
+					{
+						x: 0.40175366,
+						y: 0.22241652,
+					},
+					{
+						x: 0.008237877,
+						y: 0.22241652,
+					},
+				],
+			},
+		},
+	],
+};
+
+// Prompt for text to image
+export const prompts = [
+	"a cool black cat wearing a black leather jacket, studio lighting, photography by Wes Anderson",
+	"beautiful japanese maple tree on cliff, max rive, vibrant, colorful, dramatic cinematic lighting, 4k, 8k,",
+	"beautiful comic panel, a gorgeous cosmic goddess of the night sky wearing a dress made of astral space full of glimmering stars, ukiyo e style, intricate details, by eyvind earle, tran nguyen, yoshitaka amano, tomer hanuka, atey ghailan, kaethe butcher, james jean, line art, vibrant colors, high contrast",
+	"close on Sailor-Moon/Spiderman/Ironman/Little-Red-Riding-Hood/Assassins-Creed/Robotech-Mecha fusion, female, Cyberpunk cyber-medieval cyber-samurai, hyperdetailed wet dark-red and black with wet golden armor, dripping, cinematic lighting, by Donato Giancola and Nicolas de Stael, samuraipunk cyberpunk atompunk",
+	"black feathered angel castiel sitting on the ground imaging about universe, 8k,HD,cinematography,photorealistic,epic composition Unreal Engine,Cinematic,Color Grading, portrait Photography, Ultra-Wide Angle, Depth of Field, hyper detailed, beautifully coded by color, insane detail, intricate detail, beautifully colored, Unreal Engine, Cinematic, Color Grading, Editorial Photography, Photography, Photoshoot, Depth of Field, DOF, Tilt Blur, White Balance, 32k, Super-Resolution, Megapixel, ProPhoto RGB, Halfrear Lighting, Backlight, Natural Lighting, Incandescent, Fiber Optic, Moody Lighting, Cinematic Lighting, Studio Lighting, Soft Lighting, Volumetric, Contre-Jour, Beautiful Lighting, Accent Lighting, Global Illumination, Screen Space Global Illumination, Ray Tracing Global Illumination , Optical, Scattering, Glowing, Shadows, Rough, Shimmer, Ray Tracing Reflections, Lumen Reflections, Screen Reflections, Diffraction Gradation, Chr Aberration omatics, GB displacement, scan lines, ray tracing, ray tracing ambient occlusion, anti-aliasing, FK AA, TXAA, RTX, SSAO, Shaders, OpenGL-Shaders, GLSL-Shaders, Post-processing, Post- production , Cel Shading, Tone Mapping, CGI, VFX, SFX, incredibly detailed and intricate, hypermaximal, elegant, hyper realistic, super detailed, dynamic pose, photography, 8k",
+	"detailed schematics on how to assemble a burrito",
+	"a knolling flatlay of different types of burritos, black bg, dramatic lighting, earth tone colors",
+	"shark burrito",
+	"spider-man, samurai design armor, medieval street background, wind, dynamic, action pose, dramatic, extreme composition, realistic, intricate detail, cinematic shot, lighting, photography lighting, lightroom gallery, behance photography, professional photo, unsplash, low angle",
+	"Beautiful dramatic figurative art in the style of Tara Mcpherson and Krenz Cushart, female mystic, perfection, dreamy",
+	"ethereal magicly spore growing mycelium burrito, macro photo of colorful fungus growth",
+	"A blue sky, white clouds, a field of flowers, a rusty, rotting battle robot standing at its feet, a white one-piece dress and hat",
+	"In the style of Roger Dean and Syd Mead and Conrad Roset and Nicolas de Stael, Catwoman/Ironman/Little-Red-Riding-Hood/Robotech-Mecha fusion, Cyberpunk cyber-medieval cyber-samurai, hyperdetailed wet dark-red and cobalt and coral and black with wet golden armor, dripping iridescent oil, cinematic lighting, samuraipunk cyberpunk atompunk, splattered oil paint, digital glitches",
+	"a cute mouse sitting on the forest floor eating from a left over burrito, depth of field, rim lighting, sunset lighting, moss,",
+	"art by Simon Bisley",
+	"anime girl, character portrait, green and yellow hair, wearing black jacket with sliver spines and chains, with earrings and tattos, cool girl, concept, 2D lineart, black and white hair, sharp shading, cinematic color, sharp line, sharp details, colorful lighting, half body portrait, 4k--v 4",
+	"cute kawaii rabbit with flowers and heart. Illustration by Aya Kato, in a watercolor style. Themes: pink, love, happiness, nature. Lighting: warm, pink golden hour. Cinematic, classic, stylish, posed, detailed, HD, 8k, symmetrical, intricate detail",
+	"Christmas Holiday Salesgirl pin-up by Charles Dana Gibson and Ana Mendieta and Mira Schendel",
+	"beautiful woman with butterfly wings, fairy, sitting in flower; y Frank Frezetta",
+	"As the bee flew, it noticed that there were many beautiful flowers that were not being pollinated. So the bee set about pollinating all the flowers she could find, working day and night to make sure all the plants had a chance to flower and produce fruit light watercolor, bright, white background, few details, dreamy, Studio Ghibli",
+	"mono color sci fi",
+	"interior of a sprawling epic cyberpunk bathhouse with jacuzzis over multiple floors",
+	"north western skies",
+	"young romani woman, messy black eyeshadow, medium black hair pulled back, muscular, athletic, brawler, halter wrap top",
+	"a beautiful little girl , big soulful eyes, cute smile, 8k, anime, chibi, kawaii, pixiv , brown, dark Brown, Background hdr, portrait , close up portrait, Professional oil painting on canvas, perfect face",
+	"young mage wearing a torn robe and holding an elegant silver sword with long dark hair, scrolls, books, smart, poor, J.C Leyendecker, Ghibli, lineart, line-art stylize 500",
+	"Ancient people getting water from a stream, central asia fish, Lush central asia flowers, full landscape, dynamic, psychedelic colors, colorful, rich colors, Kawaii colors, vibrant lines, a masterpiece style by Naomi Okubo, Ernst Haeckel, Victo Ngai, the perferct atmosphere, psychedelic art, 50 image stack, hyperdetail, intricate design, crisp, sharp, high resolution, nikon telephoto lens,",
+	"a painting of a futuristic city at sunset, inspired by Craig Mullins, digital art, josan gonzales, digtial painting, futuristic but colorful shading, painting by android jones, interplanetary cathedral, futurism aesthetic",
+	"sea pattern",
+	"3d jelly cake, flower enclosed, beautiful, detailed, delicious",
+	"watercolor deer in the forest",
+	"pixiv masterpiece by ufotable, best quality illustration, ultra-detailed, face focus, dynamic pose, overhead angle, frontview portrait, anime waifu(30-years-old)-hot-babe-flirty-bodylanguage shopping, fit-thick-build, gorgeous face-perfect with perfect animeeyes-symmetric, subsurface-scattering, stable-diffusion, glows, sparkles, iridescence, high contrast, rtx[shading(focal/hardlight-diffused/ambientlight)-lighting(nadir-zenith-selective)-stylized-highcontrast-highsharpness], ufotable, sololeveling, finer hair, darker shadows, defined-pupils and iris",
+	"Mandalorian, hyperdetailed, by nicolas de stael",
+	"ginger kitten play another kitten,beautiful, garden setting,cinematic lighting",
+	"ghastly figure dressed in yellow raincoat and yellow umberella with face covered in darkness, in style of Yoshitaka Amano",
+	"young Adult African ancient Jedi , moebius , style of moebius , high detail, Black man , 8k photorealistic, neon colors , fantasypunk ,clockpunk, fantasy landscape, surrealism, apocalyptic, realistic, Cinematic, Color Grading, portrait Photography, Ultra-Wide Angle, Depth of Field, hyper-detailed, beautifully color-coded, insane details, intricate details, beautifully color graded, Unreal Engine, Cinematic, Color Grading, Editorial Photography, Photography, Photoshoot, Shot on 70mm lens, Depth of Field, DOF, Tilt Blur, Shutter Speed 1/1000, F/22, White Balance, 32k, Super-Resolution, Megapixel, Pro Photo RGB, VR, Lonely, Good, Massive, Half rear Lighting, Backlight, Natural Lighting, Incandescent, Optical Fiber, Moody Lighting, Cinematic Lighting, Studio Lighting, Soft Lighting, Volumetric, Conte-Jour, Beautiful Lighting, Accent Lighting, Global Illumination, Screen Space Global Illumination, Ray Tracing Global Illumination, Optics, Scattering, Glowing, Shadows, Rough, Shimmering, Ray Tracing Reflections, Lumen Reflections, Screen Space Reflections, Diffraction Grading, Chromatic Aberration, GB Displacement, Scan Lines, Ray Traced, Ray Tracing Ambient Occlusion, Anti-Aliasing, FKAA, TXAA, RTX, SSAO, Shaders, OpenGL-Shaders, GLSL-Shaders, Post Processing, Post-Production, Cell Shading, Tone Mapping, CGI, VFX, SFX, insanely detailed and intricate, hyper maximalist, elegant, hyper realistic, super detailed, dynamic pose, photography, Hyper realistic, volumetric, photorealistic, ultra photoreal, ultra-detailed, intricate details, 8K, super detailed, full color, ambient occlusion, sherif, pixelart, volumetric lighting, high contrast, HDR",
+	"alejandro jodorowsky's doom, game poster",
+	"Male samurai punk greaser in a medieval-punk world, holding a spear with orange-chemicals shooting out of the ends of the spear, katana sword, full body, dynamic pose, underground punk-city background, by ashley wood and Jamie Hewlett and Malcolm T. Liepke, highly detailed oil and watercolor painting",
+	"spooky medieval fantasy, line art, watercolor,town",
+	"portrait, ornate, intricately detailed, a strict stern stoic cathlic nun, eyes have a glowing glowwave red glimmer in them, she scowls and is intimidating, it is immediately clear she is not a woman whom you want to anger, the nun doesn't suffer any fools, highest definition, hyperrealism, gothicpunk, intricate grimecore details, high resolution ragepunk, Catholic nun core, volumetric cinematic and dramatic lighting, octane render",
+	"beautiful latina in a form fitting sheer white one peice, long toned legs, Deniz Saypinar with Long dark hair, in mat colored comic style by Ross Tran",
+	"A full body portrait an A young and good looking man wearing dirty noble and medieval clothes, handsome face and concerned look, dark and misty background, rainy medieval village , dramatic lighting, insanely detailed, fantasy aesthetic, style by alan lee",
+	"this is a beautiful spectral flower , with soft , fairy fog background , light smoke , light lame , on the rose , light golden rose , transparent petals ,, clear , lifelike , real petals , feeling like love ,, complex details processing , high definition ,, dream fairy tale kingdom high definition , urea , 8K hd",
+	"Lovely portrait art, Fusion between Brian Froud and Jean-Baptiste monge",
+	"seamless tile repeat pattern of lemon hand-drawn, storybook illustration, ink, pastel painting, highly detailed, wide angle, 8k",
+	"Beautiful isometric game art in the style of bastion",
+	"natural 35mm F4 ISO 100 color low contrast high quality half body portrait photo of stunning 29 year old shapely tanned caucasian female nymph humanoid with straight black hair and huge bursting g-cup chest wearing a white falling bodycon walking in a futuristic city at dusk with film grain and noise added in post processing",
+	"front view, 3d, in winter, a small and lovely anthropomorphic white snake cub, wearing a lovely chinese purple velvet hat, wearing a chinese purple cloth coat, full body, standing, symmetrical ears, bright big eyes, sweet smiling face, holding gold coins, christmas scene, loose snow, complex furry details, soft movie lights, 8k, portrait, pokemon animation style, octane rendering, rendering in the illusion engine, high quality q 2 ar 11 v 4 1",
+	"woman with a vintage camera, 1920s style old photograph",
+	"hyper-realistic detailed dragon breathing intense fire, dragon is standing on ground",
+	"Chinese dragon, flying in dark sky, galaxy, 8K, Pixar style",
+	"Smelting steel in a dark foundry, by m.w kaluta",
+	"snowman, gouache painting, curvilinear perspective, abstract realism, zorn pallete. flat colors,",
+	"Beautiful dramatic figurative art in the style of Tara Mcpherson and Krenz Cushart, Dark Priestess",
+	"cyberpunk, citroen jumpy phase1, cafe, sunset, island, space-age, googie, 50's illustration",
+	"a painting of a futuristic city at sunset, inspired by Craig Mullins, digital art, josan gonzales, digtial painting, futuristic but colorful shading, painting by android jones, interplanetary cathedral, futurism aesthetic",
+	"highly detailed beautiful cyborg female",
+	"a glorious insect collection",
+	"knolling photograph of burrito ingrediants",
+	"Marvel's Black Panther possessed by the symbiote Anti-Venom",
+	"by Lois van Baarle and Sil Chibi, beautiful black girl with beautiful long white hair covered in snails, the birth of venus, dramatic light, beautiful intricate floral ornamentation, green and gold soft colors, front lighting, hyper detailed, soft grey and gold colors, graphic novel style, clear and beautiful lighting, character design, concept art, fantasy, ink painting style",
+	"hot bubbly girl, reflective fabric, PVC high crop shrug , thin waist, thighs, hips, higly detailed hands, flirty, shy, blush, vibrant city life, neon lights, slot machines, in the style of Atey Ghailan and Joelle Jones",
+	"natural 35mm F4 full body photo of shapely caramel female prettylittlething model teacher wearing glasses and tight open white shirt at a car wash on summers day with film grain and noise added in post processing",
+	"snowflake by dieter rams",
+	"a butterfly inspired dress on a mannequin, ball-gown, hyper-detailed, photo-realistic, a dress with wings",
+	"underwater marine life",
+	"A fair-haired Norse-Gael merchant in his late 30s seen from the waist up as he journeys through a lonely valley in Galicia, sparse crumbling ruins in the hills on a clear spring day, 793 AD, Dark Ages, gritty, historically accurate, vibrant colors, digital illustration",
+	"pixiv masterpiece by ufotable, best quality illustration, ultra-detailed, face focus, dynamic pose, overhead angle, frontview portrait, anime waifu(30-years-old)-hot-babe-flirty-bodylanguage shirking, fit-thick-build, gorgeous face-perfect with perfect animeeyes-symmetric, subsurface-scattering, stable-diffusion, glows, sparkles, iridescence, high contrast, rtx[shading(focal/hardlight-diffused/ambientlight)-lighting(nadir-zenith-selective)-stylized-highcontrast-highsharpness], ufotable, sololeveling, finer hair, darker shadows, defined-pupils and iris",
+	"Han Solo and Princess Leia kiss, a screenshot by Makoto Shinkai, featured on pixiv, neo-romanticism, official art, pixiv, vibrant colors",
+	"photorealistic body photography of a pretty mermaid sitting in sea stone, fish scales, fluorescent fish scales, cinematic shot, dynamic composition, incredibly detailed, sharpen, details, intricate detail, professional lighting, film lighting, 35mm, anamorphic, Lightroom, cinematography, bokeh, lens flare, film grain, HDR10, 8K,",
+	"Stunning Fantasy Tree city, Hyperdetailed, Majestic, Volumetric lighting, beautiful, In the style of Eddie Mendoza and Don Bluth, Noah Bradley, Gaston Bussiere, Cinematic, HD",
+	"photography of an attractive smiling russian female model ; dressedlike a heroine of a horror movie with a white tank top",
+	"Stunning Creature concept art, Fusion between Brian Froud and Jean-Baptiste monge",
+	"a close up of a person with a mask on, by derek zabrocki, digital art, gold skulls, jean-sebastien rossbach, snake human hybrid, andrei riabovitchev symmetrical, deformed human body, sleek metal head, 360, ego death",
+	"A full body portrait a old Romanian priest wearing dirty medieval priest ropes, he looks very sad and sick and has dark circles around his eyes, dark and misty background, rainy medieval village , dramatic lighting, insanely detailed, fantasy aesthetic, style by alan lee",
+	"beautifully intricate wood carving of a skull, black walnut, gloss varnish, dramatic lighting, hyper realistic",
+	"fox in winter,cold colours, snow, beautiful detailed, intricate, Magical, ultra hd, cinematic, photo realistic, epic, octane render, blender, ultrarealistic ultradetailled , 32k hyper realism, realistic, DSLR, beautiful, beautiful detailed, photorealistic, cinematic, porcelain, beautiful detailed, maximum detailed, masterpiece,photorealistic ,cinematic, autocad, unreal engine, beautiful volumetriclighting, 4k,",
+	"fantasy creature Caracal mixed with a Maincoon Cat, mountain woodlands background, sitting in a tree, HD, sharp focus",
+	"cyberpunk, diner, cafe, sunset, island, space-age, googie, 50's illustration",
+	"close on Spiderman/Ironman/Venom/Sailor-Moon fusion, female, Cyberpunk cyber-medieval samurai, hyperdetailed wet dark-red and black with wet golden armor, dripping, cinematic lighting, by donato giancola and nicolas de stael, samuraipunk cyberpunk atompunk",
+	"Ramen Cat Kawaii Anime Japanese Kawaii Neko + anime style + no Background + ventablack + cute + ultra high resolution + sticker + high contrast",
+	"spider-man, superior spider-man design armor, rooftop at night background, glowing moon, dynamic, action pose, dramatic, extreme composition, realistic, intricate detail, cinematic shot, lighting, photography lighting, lightroom gallery, behance photography, professional photo, unsplash, low angle",
+	"psychedelia Hayao Miyazaky and Leiji Matsumoto artwork",
+	"a beautiful smiling woman with voluminous baroque wig with flowers, all pink pastel colors, haute couture clothes, fashion editorial, full head portrait, fashion photography, photo taken by nikon, incredibly detailed, studio product photography lighting, sharpen, light background",
+	"29 year old smiling young woman with a geeky look",
+	"profissional logo with letters O and S ,",
+	"beautiful bamboo tree, max rive, vibrant, colorful, dramatic cinematic lighting, 4k, 8k,",
+	"starfire, pixar + anime, colorful, highly detailed, exquisite. spacepunk",
+	"anime, manga, cel shaded, gourmet table, hello-fresh meal, minimal-sparkle, macro-shot, close up, luminous rich light, focus blur, fine strokes, soft hue, stunning, award-winning, dutch angle, 8k, ultra detail, by Josan Gonzalez + studio ghibli + ufotable",
+	"I was today years old when I learned about Japanese Shikki lacquer ware donut",
+	"Titanic in Norway Fjords HD",
+	"red brested european robin, bird, sitting on snow branch, singing, winter, snow, Cinematic dynamic exposure, Unreal Engine, Cinematic, Color Grading, Portrait Photography, 50mm lens Shot with Ultra Wide Angle, Depth of Field, hyper detailed, beautifully color coded, intricate details, amazing color gradation, Unreal Engine, Cinematic, Color Grading, Editorial Photo, Photo, Photo Shoot, 70mm lens shot, Depth of Field, DOF, Tilt Blur, Shutter Speed 1/1000, F/22, White Balance, 32k, Super Resolution, Megapixel, ProPhoto RGB , VR, Solo, Fine, Large, Half Backlight, Backlight, Natural Lighting, Incandescent, Fiber Optic , Bleak Lighting, Cinematic Lighting, Studio Lighting, Soft Lighting, Volumetric, Contre-Jour, Sensitive Lighting, Accent Lighting, Global Lighting , Display Area Global Lighting, Business In Tracking Global Illumination, Optics, Scattering, Glare, Shadows, Rough, Shimmer, Ray Tracing Reflections, Lumen Reflections, S screen Field Reflections, Diffraction Grading, Chromate First Aberration, GB Displacement t, Scan Lines, Ray Tracing, Ray Tracing Environment Overlay, Anti-Aliasing, FKAA, TXAA, RTX, SSAO, Shaders, OpenGL-Shaders, GLSL-Shaders, Post Rendering, Post-Production, Cel Shading, Tone Mapping, CGI, VFX, SFX, incredibly detailed and intricate, hypermaximalist, elegant, hyper-realistic, super detailed, dynamic exposure, photography, 8k",
+	"art nouveau cosmic supernova godess",
+	"woman as glass sculpture wearing new wave fashion in volumetric clouds, godrays in the style of ryan hewett + satoshi kon: splash. movement.",
+	"female pirate, shredded clothing, black scarf, posed to strike, extreme weather",
+	"micro photography, bejeweled steam locomotive ladybug, cellular,highly detailed, high definition microscope camera",
+	"A kitten peeking out of a burrito",
+	"anime he playing soccer, full body, ice in background— ar 9:16",
+	"Green, gold and black, glazier's masterpiece stained glass , fay creature, centered in the circle",
+];

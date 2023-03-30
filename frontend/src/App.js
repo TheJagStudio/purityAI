@@ -12,10 +12,12 @@ import HomePage from "./HomePage/HomePage";
 import RemoveBackground from "./RemoveBackground/RemoveBackground";
 import API from "./API/API";
 import FAQ from "./FAQ/FAQ";
+import AboutUs from "./AboutUs/AboutUs";
 import ImageUpscaler from "./ImageUpscaler/ImageUpscaler";
 import RemoveText from "./RemoveText/RemoveText";
 import Reimagine from "./Reimagine/Reimagine";
 import CleanUp from "./CleanUp/CleanUp";
+import TextToImage from "./TextToImage/TextToImage";
 
 function App() {
 	return (
@@ -32,6 +34,8 @@ function App() {
 					<Route path="/image-upscaler" element={<ImageUpscaler />} />
 					<Route path="/video2" element={<VideoPlayer2 />} />
 					<Route path="/faq" element={<FAQ />} />
+					<Route path="/about-us" element={<AboutUs />} />
+					<Route path="/text-to-image" element={<TextToImage />} />
 				</Routes>
 			</div>
 			<ContactUs />

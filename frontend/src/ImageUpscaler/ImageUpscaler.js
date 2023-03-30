@@ -16,6 +16,8 @@ import Integration from "../Components/Integration/Integration";
 import { UISD1, UISD2, UISD3, UISD4 } from "../Variables/Variables";
 
 const ImageUpscaler = () => {
+	document.title = "PurityAI | Image Upscalar";
+
 	const funcSVG = (
 		<svg width="1.875rem" height="1.875rem" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M12.5001 12.5H37.5001V37.5H12.5001V12.5ZM12.5001 4.16669H16.6667V10.4167H12.5001V4.16669ZM12.5001 39.5834H16.6667V45.8334H12.5001V39.5834ZM4.16675 12.5H10.4167V16.6667H4.16675V12.5ZM4.16675 33.3334H10.4167V37.5H4.16675V33.3334ZM39.5834 12.5H45.8334V16.6667H39.5834V12.5ZM39.5834 33.3334H45.8334V37.5H39.5834V33.3334ZM33.3334 4.16669H37.5001V10.4167H33.3334V4.16669ZM33.3334 39.5834H37.5001V45.8334H33.3334V39.5834Z" fill="currentcolor"></path>
@@ -136,10 +138,10 @@ const ImageUpscaler = () => {
 								<input onChangeCapture={handleFileChange} type="file" id="imageInput" name="imageInput" className="absolute top-0 bottom-0 left-0 right-0 opacity-0" accept="image/png,image/jpeg,image/jpg" />
 							</div>
 						</div>
-						<div class="flex gap-4 flex-col sm:flex-row w-full rounded-b-3xl bg-dark-primary p-4 px-5 -mt-5">
-							<div class="sm:flex-1 flex items-center justify-start">
-								<div class="flex bg-primary md:h-9 h-8 w-[100px] rounded-full relative">
-									<div class="h-full absolute rounded-full bg-gray-100 drop-shadow-[0_0_4px_rgba(0,0,0,0.10)] transition-all duration-300 w-[50px] translate-x-[-3px] translate-z-0" id="times"></div>
+						<div className="flex gap-4 flex-col sm:flex-row w-full rounded-b-3xl bg-dark-primary p-4 px-5 -mt-5">
+							<div className="sm:flex-1 flex items-center justify-start">
+								<div className="flex bg-primary md:h-9 h-8 w-[100px] rounded-full relative">
+									<div className="h-full absolute rounded-full bg-gray-100 drop-shadow-[0_0_4px_rgba(0,0,0,0.10)] transition-all duration-300 w-[50px] translate-x-[-3px] translate-z-0" id="times"></div>
 									<button
 										onClick={() => {
 											document.getElementById("times").style.transform = "translateX(0px)";
@@ -148,7 +150,7 @@ const ImageUpscaler = () => {
 											setUpscaleMultiplier(2);
 										}}
 										id="2X"
-										class="flex items-center justify-center absolute h-full text-sm font-semibold text-black hover:opacity-100 duration-100 opacity-100 w-[50px] left-0"
+										className="flex items-center justify-center absolute h-full text-sm font-semibold text-black hover:opacity-100 duration-100 opacity-100 w-[50px] left-0"
 									>
 										x2
 									</button>
@@ -160,13 +162,13 @@ const ImageUpscaler = () => {
 											setUpscaleMultiplier(4);
 										}}
 										id="4X"
-										class="flex items-center justify-center absolute h-full text-sm font-semibold text-white hover:opacity-100 duration-100 opacity-100 w-[50px] left-[50px]"
+										className="flex items-center justify-center absolute h-full text-sm font-semibold text-white hover:opacity-100 duration-100 opacity-100 w-[50px] left-[50px]"
 									>
 										x4
 									</button>
 								</div>
 							</div>
-							<div class="sm:flex-1 flex items-center justify-center sm:justify-end">
+							<div className="sm:flex-1 flex items-center justify-center sm:justify-end">
 								<button
 									onClick={() => {
 										let image = document.getElementById("inputImage");
@@ -293,7 +295,7 @@ const ImageUpscaler = () => {
 								const imageURL = URL.createObjectURL(imageBlog);
 								const link = document.createElement("a");
 								link.href = imageURL;
-								link.download = "transparent-image";
+								link.download = "image";
 								document.body.appendChild(link);
 								link.click();
 								document.body.removeChild(link);
