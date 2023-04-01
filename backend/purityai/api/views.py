@@ -13,16 +13,11 @@ import io
 access_token = ""
 refresh_token = ""
 id_token = ""
-gtoken = "03AKH6MRHx9bdEtfRCXXooXD05YOTxMi4kFvF-SfoCw0a9qOZ2yu9BsvKDk2A8RXlcnMHNGfRd3TPtf-PAeiSWhrcvoB-wA3KtbigVKuQjjyQPUPtbyHnF6RpbOqLU0jLLMuQOnqsQs7lbk7FE4z4LlIzbbAgf5qOyCTWuqTz47xzOH5nnYpe5QkIBHafAh-m3c7NdPD-M23hQ0E9wiC6vO9vTWarXcEvTctGEa7V4JTyHpk5YAh-yz4vg2BoWaMGPmf1Cz1zKKnoBoB3vjFFK0yBN3_VUODigEx73ZdwXtdIg-E4NeGvtPu1cnnYBkSlQHQhzNVAuGhZ0Wjg3n6lK3GmpYukLPBA8I1wbktR1NA9mUCH3wrsZZmnlaIPEfYAqaICsIHOAbSTyoqJTHnkKHnJByY3tjtCEcsXQWumlgNY0m20yCfidmXGLxZPOdhKCyhr3Y-mMiS9hqhe5xfGVIZN-deNHeAJ_vy2EpU_xwwVJ87r2tCzEOqRtZ5l6g5ttDw4cbi6lsnQ_Lx6_gO6BoNcKD_MVTODF9Q"
+gtoken = "03AKH6MRFNT6HVvCOEeeOZyehLohN3SQQGtPX-5ZuPkxCP3z1qhjhETBgPXUF1OsuYmdwZHvbHHKGV8b1I6B37WvbE0NqnncINIjUnZ9V3eBYPpBT2YXVV6I88n84L25v2PS8k3TGSj5oVFP1WhBSwR_pX7AmqJM7xq-47mjzOrRfpbEHNeQLOBGxQTVBVCP7IjNB6Yv4NmUYgqyv261dSmfh-RTgQWvA_05vs_J4R7eCPGr7xhSzd4jSXRsZDuf0zkyzeMHbEIf07Mrp0AaeB-bv14jNakWaAyDXNRg1yPzTUuQa3yVPBlx49VxrGC5tVKCN2CsWnrsd2BQD7A2BBzQPDz_rpGL3EVyl7Gh5qY8DYuGgK8pRTrbVAbDyacYoOmgYjoX7VAGx_3kKYLz6dHTF_8WeC_AIpwwP-KT6YDpT-wV7HkyxdkouYUuHdlQQKaPQ6eRDnkzqkOOCEZ1yPE_6eh2NeF41P-Z6Iy-B4tdAyHPW0AmO-pH8TsgUmlHpfaHuDuKj3XWme5dDloH2rSa1SQFyIeXUDE0uyG8KlX4MqzcBxefia1Z8"
 imageGenrated = 0
 startTime = datetime.now()
 csrfToken = ""
-purifyAPI = ""
-url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDCvp5MTJLUdtBYEKYWXJrlLzu1zuKM6Xw"
-payload = "{returnSecureToken: true}"
-headers = {'Content-Type': 'application/javascript'}
-response = requests.request("POST", url, headers=headers, data=payload)
-token = "bearer " + str(response.json()['idToken'])
+
 
 def tokenGenrator(request):
     global access_token, refresh_token, id_token
@@ -306,6 +301,7 @@ def visionAI(request):
             'content-type': 'text/plain;charset=UTF-8',
             'origin': 'https://www.gstatic.com'
         }
+        print(gtoken)
         try:
             response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
             print(response.json()["responses"][0].keys())

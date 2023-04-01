@@ -26,7 +26,7 @@ function App() {
 			<div className="min-h-[calc(100vh-26.5rem) pt-28">
 				<Routes>
 					<Route index path="/" element={<HomePage />} />
-					<Route path="/api" element={<API />} />
+					<Route path="/api-doc" element={<API />} />
 					<Route path="/remove-background" element={<RemoveBackground />} />
 					<Route path="/cleanup" element={<CleanUp />} />
 					<Route path="/text-remover" element={<RemoveText />} />

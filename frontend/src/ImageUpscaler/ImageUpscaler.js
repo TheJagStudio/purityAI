@@ -61,6 +61,18 @@ const ImageUpscaler = () => {
 		};
 		document.getElementById("inputImage").classList.add("animate-pulse");
 		document.getElementById("outputImage").classList.add("hidden");
+		let boundingBoxs = document.getElementsByClassName("boundingBox");
+		for (let index = 0; index < boundingBoxs.length; index++) {
+			const element = boundingBoxs[index];
+			element.style.display = "hidden";
+			element.remove();
+		}
+		boundingBoxs = document.getElementsByClassName("boundingBox");
+		for (let index = 0; index < boundingBoxs.length; index++) {
+			const element = boundingBoxs[index];
+			element.classList.add("hidden");
+			element.remove();
+		}
 		setClipWidth(100);
 		fetch(process.env.REACT_APP_SERVER + "/api/imageUpscaler/", requestOptions)
 			.then((response) => response.blob())
@@ -82,7 +94,29 @@ const ImageUpscaler = () => {
 			.then((response) => response.json())
 			.then((result) => {
 				setRemovedBGData(result["data"]);
-				console.log(removedBGData);
+				if (result["data"]["Safe Search"]["adult"] === "POSSIBLE" || result["data"]["Safe Search"]["adult"] === "VERY_LIKELY" || result["data"]["Safe Search"]["adult"] === "LIKELY") {
+					// document.getElementById("outputImage").classList.add("blur-[50px]");
+				} else {
+					document.getElementById("outputImage").classList.remove("blur-[50px]");
+					document.getElementById("inputImage").classList.remove("blur-[50px]");
+					if (result["data"].hasOwnProperty("Object")) {
+						for (let index = 0; index < result["data"]["Object"].length; index++) {
+							const element = result["data"]["Object"][index];
+							let normalizedVertices = element["boundingPoly"]["normalizedVertices"];
+							const box = normalizedVertices;
+							let parent = document.getElementById("mainImageContainer");
+							let newDiv = document.createElement("div");
+							newDiv.style.left = box[0]["x"] * 100 + "%";
+							newDiv.style.top = box[0]["y"] * 100 + "%";
+							newDiv.style.width = (box[1]["x"] - box[0]["x"]) * 100 + "%";
+							newDiv.style.height = (box[2]["y"] - box[1]["y"]) * 100 + "%";
+							newDiv.style.border = "2px solid #fa833e";
+							newDiv.style.position = "absolute";
+							newDiv.classList.add("boundingBox");
+							parent.appendChild(newDiv);
+						}
+					}
+				}
 			})
 			.catch((error) => console.log("error", error));
 	}
@@ -90,6 +124,8 @@ const ImageUpscaler = () => {
 	const handleFileChange = () => {
 		try {
 			setRemovedBGData([]);
+			document.getElementById("outputImage").classList.add("blur-[50px]");
+			document.getElementById("inputImage").classList.add("blur-[50px]");
 			const rmvBgDiv = document.getElementById("removedBackgroundImage");
 			const file = document.getElementById("imageInput").files[0];
 			const reader = new FileReader();
@@ -284,7 +320,7 @@ const ImageUpscaler = () => {
 						<div className={"w-[calc(100%-1.5rem)] mx-auto h-full absolute"}>
 							<div className={"absolute bg-white w-0.5 -translate-x-[0.075rem] h-full"} style={{ left: clipWidth + "%" }}></div>
 						</div>
-						<input type="range" className="RBSpliter absolute top-0 left-0 w-full h-full bg-transparent cursor-pointer" onChangeCapture={changeWidth} value={clipWidth} min={0} max={100} step={0.001} />
+						<input type="range" className="RBSpliter absolute top-0 left-0 w-full h-full bg-transparent cursor-pointer z-30" onChangeCapture={changeWidth} value={clipWidth} min={0} max={100} step={0.001} />
 						<button
 							className="px-4 cursor-pointer text-white py-2 bg-secondary rounded-lg flex items-center justify-center gap-2 font-semibold absolute bottom-2 right-2"
 							onClick={async () => {

@@ -39,7 +39,7 @@ const Integration = ({ APItitle, height1, height2, height3, height4, height5, if
 									</TabContent>
 								</div>
 							</div>
-							<a href="/api">
+							<a href="/api-doc">
 								<button className="py-3 px-5 text-sm leading-4 font-semibold outline-primary-600 select-none rounded-lg hover:opacity-70 active:opacity-50 transition-opacity bg-secondary text-white">Get an API key</button>
 							</a>
 						</div>

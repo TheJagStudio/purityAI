@@ -64,6 +64,18 @@ const Reimagine = () => {
 		document.getElementById("mainImageContainer").classList.remove("checker");
 		document.getElementById("inputImage").classList.add("animate-pulse");
 		setClipWidth(100);
+		let boundingBoxs = document.getElementsByClassName("boundingBox");
+		for (let index = 0; index < boundingBoxs.length; index++) {
+			const element = boundingBoxs[index];
+			element.style.display = "hidden";
+			element.remove();
+		}
+		boundingBoxs = document.getElementsByClassName("boundingBox");
+		for (let index = 0; index < boundingBoxs.length; index++) {
+			const element = boundingBoxs[index];
+			element.classList.add("hidden");
+			element.remove();
+		}
 
 		fetch(process.env.REACT_APP_SERVER + "/api/reimagine/", requestOptions)
 			.then((response) => {
@@ -103,12 +115,36 @@ const Reimagine = () => {
 			.then((response) => response.json())
 			.then((result) => {
 				setRemovedBGData(result["data"]);
+				if (result["data"]["Safe Search"]["adult"] === "POSSIBLE" || result["data"]["Safe Search"]["adult"] === "VERY_LIKELY" || result["data"]["Safe Search"]["adult"] === "LIKELY") {
+					// document.getElementById("outputImage").classList.add("blur-[50px]");
+				} else {
+					document.getElementById("outputImage").classList.remove("blur-[50px]");
+					if (result["data"].hasOwnProperty("Object")) {
+						for (let index = 0; index < result["data"]["Object"].length; index++) {
+							const element = result["data"]["Object"][index];
+							let normalizedVertices = element["boundingPoly"]["normalizedVertices"];
+							const box = normalizedVertices;
+							let parent = document.getElementById("mainImageContainer");
+							let newDiv = document.createElement("div");
+							newDiv.style.left = box[0]["x"] * 100 + "%";
+							newDiv.style.top = box[0]["y"] * 100 + "%";
+							newDiv.style.width = (box[1]["x"] - box[0]["x"]) * 100 + "%";
+							newDiv.style.height = (box[2]["y"] - box[1]["y"]) * 100 + "%";
+							newDiv.style.border = "2px solid #fa833e";
+							newDiv.style.position = "absolute";
+							newDiv.classList.add("boundingBox");
+							parent.appendChild(newDiv);
+						}
+					}
+				}
 			})
 			.catch((error) => console.log("error", error));
 	}
 
 	const handleFileChange = () => {
 		try {
+			setRemovedBGData([]);
+			document.getElementById("outputImage").classList.add("blur-[50px]");
 			const rmvBgDiv = document.getElementById("reimageImage");
 			const file = document.getElementById("imageInput").files[0];
 			const reader = new FileReader();

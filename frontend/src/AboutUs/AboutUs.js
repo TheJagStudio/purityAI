@@ -31,7 +31,7 @@ const AboutUs = () => {
 					<div className="flex flex-col items-center justify-center gap-10 mt-14">
 						<div className="w-full flex items-center justify-center gap-10">
 							<div className="relative group overflow-hidden rounded-xl">
-								<img src="/static/images/RB2.jpg" alt="Image" className="h-[390px] w-[390px] object-cover object-top rounded-xl" />
+								<img src="/static/images/me.jpeg" alt="Image" className="h-[390px] w-[390px] object-cover object-top rounded-xl" />
 								<div className="group-hover:opacity-100 opacity-0 transition-all duration-300 w-full h-full text-2xl absolute text-secondary font-serif font-bold bg-gradient-to-t from-primary rounded-lg to-transparent z-10 top-0 left-0">
 									<p className="flex flex-col items-center w-full absolute gap-1 bottom-5">
 										Jagrat Patel<span className="text-base font-normal text-gray-400">Team Leader</span>
@@ -47,7 +47,7 @@ const AboutUs = () => {
 								</div>
 							</div>
 							<div className="relative group overflow-hidden rounded-xl">
-								<img src="/static/images/RB2.jpg" alt="Image" className="h-[390px] w-[390px] object-cover object-top rounded-xl" />
+								<img src="/static/images/parth.jpeg" alt="Image" className="h-[390px] w-[390px] object-cover object-top rounded-xl" />
 								<div className="group-hover:opacity-100 opacity-0 transition-all duration-300 w-full h-full text-2xl absolute text-secondary font-serif font-bold bg-gradient-to-t from-primary rounded-lg to-transparent z-10 top-0 left-0">
 									<p className="flex flex-col items-center w-full absolute gap-1 bottom-5">
 										Parth Padhiar<span className="text-base font-normal text-gray-400">Frontend Developer</span>
@@ -57,7 +57,7 @@ const AboutUs = () => {
 						</div>
 						<div className="w-full flex flex-wrap items-center justify-center gap-10">
 							<div className="relative group overflow-hidden rounded-xl">
-								<img src="/static/images/RB2.jpg" alt="Image" className="h-[390px] w-[390px] object-cover object-top rounded-xl" />
+								<img src="/static/images/shubham.jpeg" alt="Image" className="h-[390px] w-[390px] object-cover object-top rounded-xl" />
 								<div className="group-hover:opacity-100 opacity-0 transition-all duration-300 w-full h-full text-2xl absolute text-secondary font-serif font-bold bg-gradient-to-t from-primary rounded-lg to-transparent z-10 top-0 left-0">
 									<p className="flex flex-col items-center w-full absolute gap-1 bottom-5">
 										Shubham Bhogayata<span className="text-base font-normal text-gray-400">Frontend Developer</span>

@@ -4,14 +4,14 @@ const Navbar = () => {
 	const [activeMenuLink, setActiveMenuLink] = useState("abc");
 
 	const navLinks = [
-		["API", "/api"],
+		["API", "/api-doc"],
 		["FAQ", "/faq"],
 		["About Us", "/about-us"],
 	];
 
 	if (activeMenuLink === "abc") {
-		if (window.location.pathname === "/api") {
-			setActiveMenuLink("/api");
+		if (window.location.pathname === "/api-doc") {
+			setActiveMenuLink("/api-doc");
 		} else if (window.location.pathname === "/faq") {
 			setActiveMenuLink("/faq");
 		} else if (window.location.pathname === "/about-us") {
@@ -49,14 +49,14 @@ const Navbar = () => {
 									</button>
 								</div>
 								<div id="dropdownApps" className="flex flex-col whitespace-nowrap opacity-0 scale-y-0 origin-top absolute top-14 right-0 py-5 rounded-lg max-h-[calc(100vh-75px)] overflow-hidden shadow-lg bg-dark-primary transition-all duration-300">
-									<p className="text-[13px] font-semibold text-white py-2 px-7 cursor-pointer scale-100 hover:scale-110 transition-all duration-300 origin-left w-max">
+									{/* <p className="text-[13px] font-semibold text-white py-2 px-7 cursor-pointer scale-100 hover:scale-110 transition-all duration-300 origin-left w-max">
 										<a className="flex flex-row gap-3 items-center hover:text-white hover:no-underline" href="/cleanup">
 											<svg width="18" height="18" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path d="M29.1665 39.5833H43.7499V43.75H24.9999L16.6707 43.7541L3.15611 30.2395C2.76555 29.8489 2.54614 29.319 2.54614 28.7666C2.54614 28.2142 2.76555 27.6844 3.15611 27.2937L25.2499 5.19579C25.4433 5.00209 25.6731 4.84843 25.926 4.74358C26.1789 4.63874 26.45 4.58478 26.7238 4.58478C26.9976 4.58478 27.2687 4.63874 27.5216 4.74358C27.7745 4.84843 28.0043 5.00209 28.1978 5.19579L44.4019 21.4C44.7925 21.7906 45.0119 22.3204 45.0119 22.8729C45.0119 23.4253 44.7925 23.9551 44.4019 24.3458L29.1665 39.5833ZM29.929 33.05L39.9832 22.8729L26.7249 9.61454L16.6707 19.7917L29.929 33.05Z" fill="currentcolor"></path>
 											</svg>
 											Cleanup
 										</a>
-									</p>
+									</p> */}
 									<p className="text-[13px] font-semibold text-white py-2 px-7 cursor-pointer scale-100 hover:scale-110 transition-all duration-300 origin-left w-max">
 										<a className="flex flex-row gap-3 items-center hover:text-white hover:no-underline" href="/image-upscaler">
 											<svg width="18" height="18" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
